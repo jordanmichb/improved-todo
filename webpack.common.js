@@ -1,3 +1,26 @@
+/* 
+    If adding images in HTML or JavaScript, the necessary changes will need to be made 
+    
+    With HTML:
+
+        Run:
+            npm install --save-dev html-loader
+
+        Add below into module > rules:
+            {
+                test: /\.html$/i,
+                loader: "html-loader",
+            }
+
+    With JavaScript:
+
+            Add below into module > rules:
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: "asset/resource",
+            }
+*/
+
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 

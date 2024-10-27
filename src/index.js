@@ -1,3 +1,2 @@
-import './styles.css'
-
-console.log('Working');
+import './styles.css';
+import { ScreenController } from './screenController.js';
