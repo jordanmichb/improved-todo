@@ -1,4 +1,4 @@
-import { Task } from "./task";
+import Task from "./task";
 
 function Project(title, description, dueDate, priority) {
     this.title = title;
@@ -15,4 +15,4 @@ Project.prototype.addTask = function(title, description, dueDate, priority, note
     this.tasks.push(task);
 }
 
-export { Project };
+export default Project;

@@ -18,16 +18,16 @@ button {
     font-size: 1rem;
 }
 
-/*******************************
-Styiling for navigattion sidebar
-*******************************/
-
+/*****************************
+Styling for navigation sidebar
+******************************/
 #sidebar {
     border: 1px solid blue;
     height: 100%;
     width: 18rem;
     position: absolute;
     padding: 20px;
+    transition: transform 500ms;
 }
 
 nav {
@@ -46,15 +46,25 @@ nav button:nth-child(5) {
     margin-bottom: 30px;
 }
 
+#project-list {
+    overflow-y: scroll;
+}
+
+/**************************
+Styling for main content
+**************************/
 #main {
     border: 1px solid green;
     min-height: 100%;
     width: calc(100% - 18rem);
     margin-left: 18rem;
-    
+    padding: 20px 10%;
+    transition: margin-left 500ms, width 500ms;
 }
 
-
+/**************************
+Media Queries
+**************************/
 /* 1400px and below */
 @media only screen and (max-width: 1400px) {
 
@@ -65,7 +75,14 @@ nav button:nth-child(5) {
 
 }
 
-/* 500px and below */
-@media only screen and (max-width: 500px) {
+/* 800px and below */
+@media only screen and (max-width: 800px) {
+    #sidebar {
+        transform: translateX(-18rem);
+    }
 
+    #main {
+        margin-left: 0;
+        width: 100%;
+    }
 }

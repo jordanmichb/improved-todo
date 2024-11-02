@@ -1,7 +1,7 @@
 // Use factory as IIFE since only single
 // instance is needed and to utilize closures
 
-import { Project } from './project.js';
+import Project from './project.js';
 
 const TodoController = (function() {
     const projects = [];
@@ -19,4 +19,4 @@ const TodoController = (function() {
     }
 })();
 
-export { TodoController };
+export default TodoController;

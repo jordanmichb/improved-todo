@@ -10,4 +10,4 @@ function Task(title, description, dueDate, priority, notes) {
 }
 
 
-export { Task };
+export default Task;
