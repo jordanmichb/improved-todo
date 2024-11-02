@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+
+}
+
+button {
+    background: none;
+    padding: 7px;
+    font-size: 1rem;
+}
+
+/*******************************
+Styiling for navigattion sidebar
+*******************************/
+
+#sidebar {
+    border: 1px solid blue;
+    height: 100%;
+    width: 18rem;
+    position: absolute;
+    padding: 20px;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+nav h2 {
+    border-bottom: 1px solid black;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+nav button:nth-child(5) {
+    margin-bottom: 30px;
+}
+
+#main {
+    border: 1px solid green;
+    min-height: 100%;
+    width: calc(100% - 18rem);
+    margin-left: 18rem;
+    
+}
+
+
+/* 1400px and below */
+@media only screen and (max-width: 1400px) {
+
+}
+
+/* 1200px and below */
+@media only screen and (max-width: 1200px) {
+
+}
+
+/* 500px and below */
+@media only screen and (max-width: 500px) {
+
+}
