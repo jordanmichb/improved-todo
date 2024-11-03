@@ -19,7 +19,32 @@ button {
 }
 
 /*****************************
-Styling for navigation sidebar
+* Header
+******************************/
+header {
+    border: 1px solid red;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+#hamburger{ 
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+}  
+
+#hamburger span {
+    width: 40px;
+    height: 3px;
+    background-color: black;
+    border-radius: 5px;
+}
+
+/*****************************
+* Navigation sidebar
 ******************************/
 #sidebar {
     border: 1px solid blue;
@@ -27,8 +52,31 @@ Styling for navigation sidebar
     width: 18rem;
     position: absolute;
     padding: 20px;
-    transition: transform 500ms;
+    /* transition: transform 500ms; */
 }
+
+#user {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    /* border-bottom: 1px solid; */
+}
+
+#profile-pic {
+    width: 47px;
+    height: 47px;
+    padding: 3px;
+    border: 2px solid #dee2e6;
+    border-radius: 50%;
+    transition: box-shadow 500ms;
+}
+
+#profile-pic:hover {
+    box-shadow: 0 0 10px 2px blue;
+}
+
 
 nav {
     display: flex;
@@ -51,7 +99,7 @@ nav button:nth-child(5) {
 }
 
 /**************************
-Styling for main content
+* Main content
 **************************/
 #main {
     border: 1px solid green;
@@ -59,11 +107,23 @@ Styling for main content
     width: calc(100% - 18rem);
     margin-left: 18rem;
     padding: 20px 10%;
-    transition: margin-left 500ms, width 500ms;
+    /* transition: margin-left 500ms, width 500ms; */
 }
 
 /**************************
-Media Queries
+* Task views
+**************************/
+.view-header {
+    margin-top: 77px;
+    margin-bottom: 50px;
+}
+
+.project-component h2 {
+
+}
+
+/**************************
+* Media Queries
 **************************/
 /* 1400px and below */
 @media only screen and (max-width: 1400px) {
@@ -84,5 +144,9 @@ Media Queries
     #main {
         margin-left: 0;
         width: 100%;
+    }
+
+    #hamburger {
+        display: flex;
     }
 }
