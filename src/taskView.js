@@ -13,16 +13,16 @@ function createTaskView() {
     console.log(projects)
 
     const projectComponent = document.createElement('div');
+    projectComponent.classList.add('project-component');
 
     for (const project of projects) {
 
-        
-        projectComponent.classList.add('project-component');
 
         const projectTitle = document.createElement('h2');
         projectTitle.textContent = project.title;
 
         const taskComponent = document.createElement('div');
+        taskComponent.classList.add('task-component');
 
         for (const task of project.tasks) {
             

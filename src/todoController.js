@@ -11,6 +11,8 @@ const TodoController = (function() {
 
     const fakeProject = new Project('Project1', 'description', 'dueDate', 'priority');
     fakeProject.addTask('Task1', 'description', 'dueDate', 'priority', 'notes');
+    fakeProject.addTask('Task1.2', 'description', 'dueDate', 'priority', 'notes');
+    fakeProject.addTask('Task1.3', 'description', 'dueDate', 'priority', 'notes');
     projects.push(fakeProject);
 
     const fakeProject2 = new Project('Project2', 'description', 'dueDate', 'priority');
