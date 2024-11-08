@@ -37,10 +37,16 @@ function createTaskView() {
 
     view.appendChild(projectComponent);
 
+    return view;
+}
 
-
-
-    
+function createTodayView() {
+    const view = document.createElement('div');
+    view.id = 'content';
+    const header = document.createElement('h1');
+    header.classList.add('view-header');
+    header.textContent = 'Today';
+    view.appendChild(header);
 
     return view;
 }
@@ -51,4 +57,13 @@ function loadTaskView() {
     content.appendChild(createTaskView());
 }
 
-export default loadTaskView;
+function loadTodayView() {
+    const content = document.querySelector('#main');
+    content.textContent = '';
+    content.appendChild(createTodayView());
+}
+
+export { 
+    loadTaskView,
+    loadTodayView
+};

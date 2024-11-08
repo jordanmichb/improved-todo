@@ -2,32 +2,37 @@
 // instance is needed and to utilize closures
 
 import Project from './project.js';
+import StorageController from './storageController.js';
 
 const TodoController = (function() {
     const projects = [];
-
-
-
-
-    const fakeProject = new Project('Project1', 'description', 'dueDate', 'priority');
+    const fakeProject = new Project('Project1', 'dueDate');
     fakeProject.addTask('Task1', 'description', 'dueDate', 'priority', 'notes');
     fakeProject.addTask('Task1.2', 'description', 'dueDate', 'priority', 'notes');
     fakeProject.addTask('Task1.3', 'description', 'dueDate', 'priority', 'notes');
     projects.push(fakeProject);
 
-    const fakeProject2 = new Project('Project2', 'description', 'dueDate', 'priority');
+    const fakeProject2 = new Project('Project2','dueDate');
     fakeProject2.addTask('Task2', 'description', 'dueDate', 'priority', 'notes');
     projects.push(fakeProject2);
 
 
 
+    if (!StorageController.get('projects')) {
 
-    function createProject(title, description, dueDate, priority) {
-        const project = new Project(title, description, dueDate, priority);
-        projects.push(project);
+        StorageController.setStringify('projects', projects);
     }
 
-    function getProjects() { return projects }
+
+    function createProject(title, dueDate) {
+        const project = new Project(title, dueDate);
+        projects.push(project);
+        StorageController.setStringify('projects', projects);
+    }
+
+    function getProjects() { 
+        return StorageController.getParsed('projects');
+    }
 
     return {
         createProject,

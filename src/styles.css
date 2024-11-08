@@ -16,6 +16,8 @@ button {
     background: none;
     padding: 7px;
     font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid;
 }
 
 /*****************************
@@ -59,14 +61,18 @@ header {
     display: flex;
     justify-content: left;
     align-items: center;
-    gap: 20px;
+    gap: 7px;
     margin-bottom: 30px;
     /* border-bottom: 1px solid; */
 }
 
+#user a {
+    height: 40px;
+}
+
 #profile-pic {
-    width: 47px;
-    height: 47px;
+    width: 40px;
+    height: 40px;
     padding: 3px;
     border: 2px solid #dee2e6;
     border-radius: 50%;
@@ -76,7 +82,6 @@ header {
 #profile-pic:hover {
     box-shadow: 0 0 10px 2px blue;
 }
-
 
 nav {
     display: flex;
@@ -96,6 +101,9 @@ nav h2:not(:first-child) {
 
 #project-list {
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 /**************************
@@ -133,6 +141,58 @@ nav h2:not(:first-child) {
     padding-bottom: 5px;
     margin-bottom: 15px;
 }
+
+/*****************************
+* Modal
+******************************/
+.modal-overlay {
+    background-color: rgba(128, 128, 128, 0.415);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: white;
+    border-radius: 5px;
+    width: 400px;
+    margin: 10px;
+}
+
+.modal-header {
+    border-bottom: 1px solid;
+    padding: 20px;
+    font-size: 1.7rem;
+}
+
+.modal form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal form input {
+    padding: .5em 5px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.modal-btns {
+    border-top: 1px solid gray;
+    padding-top: 20px;
+    display: flex;
+    justify-content: right;
+    gap: 20px;
+}
+
+
 
 /**************************
 * Media Queries

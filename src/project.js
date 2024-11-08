@@ -1,10 +1,8 @@
 import Task from "./task";
 
-function Project(title, description, dueDate, priority) {
+function Project(title, dueDate) {
     this.title = title;
-    this.description = description;
     this.dueDate = dueDate;
-    this.priority = priority;
 
     this.tasks = [];
 }

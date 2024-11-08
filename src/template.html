@@ -20,18 +20,33 @@
         </div>
         <nav>
             <h2>Tasks</h2>
-            <button>All</button>
-            <button>Today</button>
-            <button>Upcoming</button>
-            <button>Completed</button>
+            <button id="all">All</button>
+            <button id="today">Today</button>
+            <button id="upcoming">Upcoming</button>
+            <button id="completed">Completed</button>
 
             <h2>Projects</h2>
-            <button>Add New Project</button>
+            <button id="create-project">Add New Project</button>
             <div id="project-list"></div>
         </nav>
     </aside>
     <main id="main">
         
     </main>
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">Add Project</div>
+            <form>
+                <label for="project-name">Name:</label>
+                <input id="project-name" type="text" name="project-name" required>
+                <label for="project-due">Due Date:</label>
+                <input id="project-due" type="date" name="project-due">
+                <div class="modal-btns">
+                    <button id="cancel-project">Cancel</button>
+                    <button id="add-project" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
