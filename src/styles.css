@@ -5,10 +5,11 @@
 }
 
 html, body {
-    /* height: 100%; */
+    
 }
 
 body {
+    /* min-height: 100vh; */
     position: relative;
 }
 
@@ -104,7 +105,7 @@ nav h2:not(:first-child) {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    height: 265px;
+    height: 290px;
 }
 
 /**************************
@@ -112,7 +113,7 @@ nav h2:not(:first-child) {
 **************************/
 #main {
     border: 1px solid green;
-    min-height: 100%;
+    min-height: 100vh;
     width: calc(100% - 18rem);
     margin-left: 18rem;
     padding: 20px 5%;
@@ -124,24 +125,47 @@ nav h2:not(:first-child) {
 * Task views
 **************************/
 .view-header {
-    margin-top: 77px;
+    margin-top: 65px;
     margin-bottom: 50px;
 }
 
-.project-component h2 {
+.project-component {
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.project-component div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid black;
     padding-bottom: 10px;
     margin-bottom: 20px;
+}
+
+.project-component h2 {
+    
 }
 
 .project-component h2:not(:first-child) {
     margin-top: 30px;
 }
 
-.task-component p {
+.task-component {
+    width: 100%;
     border-bottom: 1px solid gray;
     padding-bottom: 5px;
     margin-bottom: 15px;
+    display: flex;
+}
+
+.task-component p:first-child {
+    
+    flex: 1;
+}
+
+.task-component div {
+
 }
 
 /*****************************

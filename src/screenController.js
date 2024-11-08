@@ -19,9 +19,10 @@ const ScreenController = (function() {
 
     addProjectBtn.addEventListener('click', function() {
         const name = document.querySelector('#project-name').value;
-        console.log(name);
-        const dueDate = document.querySelector('#project-due').value;
-        console.log(dueDate);
+        // Input comes as yyyy-mm-dd, format to mm/dd/yyy for display
+        const dateInput = document.querySelector('#project-due').value.split('-');
+        const dueDate = `${dateInput[1]}/${dateInput[2]}/${dateInput[0]}`;
+
         TodoController.createProject(name, dueDate);
 
 

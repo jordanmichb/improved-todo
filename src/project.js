@@ -1,6 +1,6 @@
 import Task from "./task";
 
-function Project(title, dueDate) {
+function Project(title, dueDate = '') {
     this.title = title;
     this.dueDate = dueDate;
 
