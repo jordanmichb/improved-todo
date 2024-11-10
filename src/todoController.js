@@ -8,7 +8,7 @@ const TodoController = (function() {
     let projects = [];
 
     if (!StorageController.get('projects')) {
-        const fakeProject = new Project('Project1');
+        const fakeProject = new Project('Project1', '11/8/2024');
         fakeProject.addTask('Task1', 'description', 'dueDate', 'priority', 'notes');
         fakeProject.addTask('Task1.2', 'description', 'dueDate', 'priority', 'notes');
         fakeProject.addTask('Task1.3', 'description', 'dueDate', 'priority', 'notes');
@@ -34,9 +34,15 @@ const TodoController = (function() {
         return StorageController.getParsed('projects');
     }
 
+    function getProject(idx) { 
+        const projects = StorageController.getParsed('projects');
+        return projects[idx]
+    }
+
     return {
         createProject,
         getProjects,
+        getProject,
     }
 })();
 

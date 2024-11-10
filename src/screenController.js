@@ -1,6 +1,5 @@
 import TodoController from './todoController.js';
-import { loadTaskView, loadTodayView } from './taskView.js';
-import loadAddProjectModal from './addProject.js';
+import { loadProjectView, loadTaskView, loadTodayView } from './pageView.js';
 
 const ScreenController = (function() {
     const allBtn = document.querySelector('#all');
@@ -12,6 +11,9 @@ const ScreenController = (function() {
 
     allBtn.addEventListener('click', loadTaskView);
     todayBtn.addEventListener('click', loadTodayView);
+
+
+
 
     createProjectBtn.addEventListener('click', function() {
         projectModal.style.visibility = 'visible';
@@ -25,17 +27,26 @@ const ScreenController = (function() {
 
         TodoController.createProject(name, dueDate);
 
-
         //projectModal.style.visibility = 'hidden';
     })
     
+
+    function displayProjectView() {
+
+    }
+
     function loadProjectList() {
         const projectList = document.querySelector('#project-list');
         const projects = TodoController.getProjects();
 
-        for (const project of projects) {
+        for (let i = 0; i < projects.length; i++) {
             const button = document.createElement('button');
-            button.textContent = project.title;
+            button.textContent = projects[i].title;
+            button.dataset.project = i;
+
+            button.addEventListener('click', function(e) {
+                loadProjectView(e.target.dataset.project);
+            })
 
             projectList.appendChild(button);
         }
