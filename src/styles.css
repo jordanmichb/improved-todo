@@ -145,8 +145,8 @@ nav h2:not(:first-child) {
     margin-bottom: 20px;
 }
 
-.project-component h2:not(:first-child) {
-    margin-top: 30px;
+.project-component {
+    margin-bottom: 70px;
 }
 
 .task-component {

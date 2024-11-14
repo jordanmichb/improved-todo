@@ -9,13 +9,13 @@ const TodoController = (function() {
 
     if (!StorageController.get('projects')) {
         const fakeProject = new Project('Project1', '11/8/2024');
-        fakeProject.addTask('Task1', 'description', 'dueDate', 'priority', 'notes');
-        fakeProject.addTask('Task1.2', 'description', 'dueDate', 'priority', 'notes');
-        fakeProject.addTask('Task1.3', 'description', 'dueDate', 'priority', 'notes');
+        fakeProject.addTask('Task1', 'description', '11/5/2024', 'priority', 'notes');
+        fakeProject.addTask('Task1.2', 'description', '11/28/2024', 'priority', 'notes');
+        fakeProject.addTask('Task1.3', 'description', '11/18/2024', 'priority', 'notes');
         projects.push(fakeProject);
 
         const fakeProject2 = new Project('Project2');
-        fakeProject2.addTask('Task2', 'description', 'dueDate', 'priority', 'notes');
+        fakeProject2.addTask('Task2', 'description', '11/25/2024', 'priority', 'notes');
         projects.push(fakeProject2);
         StorageController.setStringify('projects', projects);
     }

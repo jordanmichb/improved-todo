@@ -6,7 +6,9 @@ const ScreenController = (function() {
     const todayBtn = document.querySelector('#today');
     const createProjectBtn = document.querySelector('#create-project');
     const projectModal = document.querySelector('#project-modal');
+    const projectForm = document.querySelector('#project-form');
     const addProjectBtn = document.querySelector('#add-project');
+    const cancelProjectBtn = document.querySelector('#cancel-project');
     
 
     allBtn.addEventListener('click', loadTaskView);
@@ -28,7 +30,14 @@ const ScreenController = (function() {
         TodoController.createProject(name, dueDate);
 
         //projectModal.style.visibility = 'hidden';
-    })
+    });
+
+    cancelProjectBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        projectForm.reset();
+        projectModal.style.visibility = 'hidden';
+
+    });
     
 
     function displayProjectView() {

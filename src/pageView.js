@@ -67,6 +67,13 @@ function createTaskView() {
 
 
     const projects = TodoController.getProjects();
+
+    for (const project of projects) {
+        for (const task of project.tasks) {
+            view.appendChild(createTaskComponent(task));
+        }
+    }
+    /*
     for (const project of projects) {
         const projectComponent = document.createElement('div');
         const projectHeader = document.createElement('div');
@@ -74,6 +81,7 @@ function createTaskView() {
         const projectDueDate = document.createElement('p');
 
         projectComponent.classList.add('project-component');
+        projectHeader.classList.add('project-header');
         projectTitle.textContent = project.title;
         projectDueDate.textContent = project.dueDate;
 
@@ -86,10 +94,7 @@ function createTaskView() {
         }
 
         view.appendChild(projectComponent);
-    }
-
-    
-
+    }*/
     return view;
 }
 
