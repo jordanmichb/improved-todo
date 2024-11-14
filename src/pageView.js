@@ -29,7 +29,7 @@ function createTaskComponent(task) {
 
 function createProjectView(idx) {
     // Get the selected project
-    const project = TodoController.getProjects()[idx];
+    const project = TodoController.getProject(idx);
 
     // Create the view container and header
     const view = document.createElement('div');
@@ -65,14 +65,12 @@ function createTaskView() {
 
     view.appendChild(header);
 
+    const tasks = TodoController.getTasks();
 
-    const projects = TodoController.getProjects();
-
-    for (const project of projects) {
-        for (const task of project.tasks) {
-            view.appendChild(createTaskComponent(task));
-        }
+    for (const task of tasks) {
+        view.appendChild(createTaskComponent(task));
     }
+    
     /*
     for (const project of projects) {
         const projectComponent = document.createElement('div');
@@ -100,11 +98,19 @@ function createTaskView() {
 
 function createTodayView() {
     const view = document.createElement('div');
+    const header = createHeader('Today');
+
     view.id = 'content';
-    const header = document.createElement('h1');
-    header.classList.add('view-header');
-    header.textContent = 'Today';
+
     view.appendChild(header);
+
+    const projects = TodoController.getProjects();
+    
+    const tasks = TodoController.getTodayTasks();
+    
+    for (const task of tasks) {
+        view.appendChild(createTaskComponent(task));
+    }
 
     return view;
 }

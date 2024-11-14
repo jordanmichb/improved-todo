@@ -6,10 +6,12 @@ import StorageController from './storageController.js';
 
 const TodoController = (function() {
     let projects = [];
+    let todayTasks = [];
+    let upcomingTasks = [];
 
     if (!StorageController.get('projects')) {
         const fakeProject = new Project('Project1', '11/8/2024');
-        fakeProject.addTask('Task1', 'description', '11/5/2024', 'priority', 'notes');
+        fakeProject.addTask('Task1', 'description', '11/14/2024', 'priority', 'notes');
         fakeProject.addTask('Task1.2', 'description', '11/28/2024', 'priority', 'notes');
         fakeProject.addTask('Task1.3', 'description', '11/18/2024', 'priority', 'notes');
         projects.push(fakeProject);
@@ -23,6 +25,8 @@ const TodoController = (function() {
         projects = StorageController.getParsed('projects');
     }
 
+    setTodayTasks();
+
 
     function createProject(title, dueDate) {
         const project = new Project(title, dueDate);
@@ -31,7 +35,8 @@ const TodoController = (function() {
     }
 
     function getProjects() { 
-        return StorageController.getParsed('projects');
+        //return StorageController.getParsed('projects');
+        return projects;
     }
 
     function getProject(idx) { 
@@ -39,10 +44,31 @@ const TodoController = (function() {
         return projects[idx]
     }
 
+
+    function getTasks() {
+        return  projects.flatMap(project => project.tasks);
+    }
+
+    // flatMap to get array of tasks only, 
+    // then filter for tasks due today by converting
+    // each dueDate into a date string and comparing to today's date,
+    function setTodayTasks() {
+        // Get today's date and set to readable format without time ie. 'Thu Nov 14 2024'
+        const today = new Date().toDateString();
+        todayTasks =  projects.flatMap(project => project.tasks)
+                              .filter((task) => new Date(task.dueDate).toDateString() === today);
+    }
+
+    function getTodayTasks() {
+        return todayTasks;
+    }
+
     return {
         createProject,
         getProjects,
         getProject,
+        getTasks,
+        getTodayTasks,
     }
 })();
 
