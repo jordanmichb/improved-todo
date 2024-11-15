@@ -153,10 +153,21 @@ nav h2:not(:first-child) {
     padding-bottom: 5px;
     margin-bottom: 15px;
     display: flex;
+    align-items: center;
 }
 
 .task-component p:first-child {
     flex: 1;
+}
+
+.task-btn, .task-img {
+    width: 20px;
+    height: 20px;
+}
+
+.task-btn {
+    padding: 0;
+    border: none;
 }
 
 /**************************

@@ -1,4 +1,6 @@
 import TodoController from './todoController.js';
+import edit from './images/edit.png';
+import trash from './images/trash.png';
 
 function createHeader(title) {
     const header = document.createElement('h1');
@@ -10,19 +12,43 @@ function createHeader(title) {
 
 function createTaskComponent(task) {
     const taskComponent = document.createElement('div');
+
+    const completeLabel = document.createElement('label');
+    const taskComplete = document.createElement('input');
+
     const taskTitle = document.createElement('p');
     const taskDate = document.createElement('p');
-    const taskEdit = document.createElement('div');
-    const taskDelete = document.createElement('div');
+    const editBtn = document.createElement('button');
+    const editImg = document.createElement('img');
+    const deleteBtn = document.createElement('button');
+    const deleteImg = document.createElement('img');
 
     taskComponent.classList.add('task-component');
+    completeLabel.classList.add('complete-label');
+    taskComplete.classList.add('task-complete');
+    editBtn.classList.add('task-btn');
+    editImg.classList.add('task-img');
+    deleteBtn.classList.add('task-btn');
+    deleteImg.classList.add('task-img');
+
+    completeLabel.setAttribute('for', 'task-complete');
+    taskComplete.setAttribute('type', 'checkbox');
+
+    taskComplete.id = 'task-complete';
     taskTitle.textContent = task.title;
     taskDate.textContent = task.dueDate;
+    editImg.src = edit;
+    deleteImg.src = trash;
 
+    editBtn.appendChild(editImg);
+    deleteBtn.appendChild(deleteImg);
+
+    taskComponent.appendChild(completeLabel);
+    taskComponent.appendChild(taskComplete);
     taskComponent.appendChild(taskTitle);
     taskComponent.appendChild(taskDate);
-    taskComponent.appendChild(taskEdit);
-    taskComponent.appendChild(taskDelete);
+    taskComponent.appendChild(editBtn);
+    taskComponent.appendChild(deleteBtn);
 
     return taskComponent;
 }
