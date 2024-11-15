@@ -103,10 +103,25 @@ function createTodayView() {
     view.id = 'content';
 
     view.appendChild(header);
-
-    const projects = TodoController.getProjects();
     
     const tasks = TodoController.getTodayTasks();
+    
+    for (const task of tasks) {
+        view.appendChild(createTaskComponent(task));
+    }
+
+    return view;
+}
+
+function createUpcomingView() {
+    const view = document.createElement('div');
+    const header = createHeader('Upcoming');
+
+    view.id = 'content';
+
+    view.appendChild(header);
+
+    const tasks = TodoController.getUpcomingTasks();
     
     for (const task of tasks) {
         view.appendChild(createTaskComponent(task));
@@ -128,7 +143,7 @@ function loadTodayView() {
 }
 
 export { 
-    loadProjectView,
-    loadTaskView,
-    loadTodayView,
+    createTaskView,
+    createTodayView,
+    createUpcomingView,
 };

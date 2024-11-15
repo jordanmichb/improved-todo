@@ -1,9 +1,10 @@
 import TodoController from './todoController.js';
-import { loadProjectView, loadTaskView, loadTodayView } from './pageView.js';
+import { createTaskView, createTodayView, createUpcomingView } from './pageView.js';
 
 const ScreenController = (function() {
     const allBtn = document.querySelector('#all');
     const todayBtn = document.querySelector('#today');
+    const upcomingBtn = document.querySelector('#upcoming');
     const createProjectBtn = document.querySelector('#create-project');
     const projectModal = document.querySelector('#project-modal');
     const projectForm = document.querySelector('#project-form');
@@ -11,8 +12,9 @@ const ScreenController = (function() {
     const cancelProjectBtn = document.querySelector('#cancel-project');
     
 
-    allBtn.addEventListener('click', loadTaskView);
-    todayBtn.addEventListener('click', loadTodayView);
+    allBtn.addEventListener('click', function() { loadView(createTaskView()) });
+    todayBtn.addEventListener('click', function() { loadView(createTodayView()) });
+    upcomingBtn.addEventListener('click', function() { loadView(createUpcomingView()) });
 
 
 
@@ -40,8 +42,10 @@ const ScreenController = (function() {
     });
     
 
-    function displayProjectView() {
-
+    function loadView(view = createTaskView()) {
+        const content = document.querySelector('#main');
+        content.textContent = '';
+        content.appendChild(view);
     }
 
     function loadProjectList() {
@@ -63,7 +67,8 @@ const ScreenController = (function() {
 
 
     return {
-        loadProjectList
+        loadView,
+        loadProjectList,
     }
 })();
 
