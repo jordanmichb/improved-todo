@@ -58,8 +58,7 @@ const ScreenController = (function() {
             button.dataset.project = i;
 
             button.addEventListener('click', function(e) {
-                loadView(createProjectView(e.target.dataset.project))
-                //loadProjectView(e.target.dataset.project);
+                loadView(createProjectView(e.target.dataset.project));
             })
 
             projectList.appendChild(button);
