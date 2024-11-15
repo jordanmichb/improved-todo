@@ -19,6 +19,7 @@ button {
     font-size: 1rem;
     border-radius: 5px;
     border: 1px solid;
+    cursor: pointer;
 }
 
 /*****************************
@@ -126,16 +127,13 @@ nav h2:not(:first-child) {
     justify-content: space-between;
     align-items: center;
     margin-top: 65px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
-/**************************
-* Page views
-**************************/
 .view-header span {
     font-size: 1.3rem;
 }
-
+/*
 .project-component div:first-child {
     display: flex;
     justify-content: space-between;
@@ -147,7 +145,7 @@ nav h2:not(:first-child) {
 
 .project-component {
     margin-bottom: 70px;
-}
+}*/
 
 .task-component {
     width: 100%;
@@ -159,6 +157,22 @@ nav h2:not(:first-child) {
 
 .task-component p:first-child {
     flex: 1;
+}
+
+/**************************
+* Project views
+**************************/
+.project-btns {
+    display: flex;
+    justify-content: right;
+}
+
+.add-task {
+    font-size: .8rem;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    margin-right: -5px;
 }
 
 /*****************************

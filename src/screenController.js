@@ -1,5 +1,5 @@
 import TodoController from './todoController.js';
-import { createTaskView, createTodayView, createUpcomingView } from './pageView.js';
+import { createProjectView, createTaskView, createTodayView, createUpcomingView } from './pageView.js';
 
 const ScreenController = (function() {
     const allBtn = document.querySelector('#all');
@@ -58,7 +58,8 @@ const ScreenController = (function() {
             button.dataset.project = i;
 
             button.addEventListener('click', function(e) {
-                loadProjectView(e.target.dataset.project);
+                loadView(createProjectView(e.target.dataset.project))
+                //loadProjectView(e.target.dataset.project);
             })
 
             projectList.appendChild(button);

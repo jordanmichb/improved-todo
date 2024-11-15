@@ -35,25 +35,28 @@ function createProjectView(idx) {
     const view = document.createElement('div');
     const header = createHeader(project.title);
     const projectDue = document.createElement('span');
+    const btnContainer = document.createElement('div');
+    const addTaskBtn = document.createElement('button');
 
     view.id = 'content';
+
     projectDue.classList.add('project-due-header');
+    btnContainer.classList.add('project-btns');
+    addTaskBtn.classList.add('add-task');
+
     projectDue.textContent = project.dueDate;
+    addTaskBtn.textContent = '+ Add task';
 
     header.appendChild(projectDue);
+    btnContainer.appendChild(addTaskBtn);
     view.appendChild(header);
+    view.appendChild(btnContainer);
 
     for (const task of project.tasks) {
         view.appendChild(createTaskComponent(task));
     }
 
     return view;
-}
-
-function loadProjectView(idx) {
-    const content = document.querySelector('#main');
-    content.textContent = '';
-    content.appendChild(createProjectView(idx));
 }
 
 function createTaskView() {
@@ -130,19 +133,8 @@ function createUpcomingView() {
     return view;
 }
 
-function loadTaskView() {
-    const content = document.querySelector('#main');
-    content.textContent = '';
-    content.appendChild(createTaskView());
-}
-
-function loadTodayView() {
-    const content = document.querySelector('#main');
-    content.textContent = '';
-    content.appendChild(createTodayView());
-}
-
 export { 
+    createProjectView,
     createTaskView,
     createTodayView,
     createUpcomingView,
