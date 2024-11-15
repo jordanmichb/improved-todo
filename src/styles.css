@@ -154,20 +154,25 @@ nav h2:not(:first-child) {
     margin-bottom: 15px;
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
-.task-component p:first-child {
+.task-component p:first-of-type {
     flex: 1;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .task-btn, .task-img {
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
 }
 
 .task-btn {
     padding: 0;
     border: none;
+    margin: 0 3px;
 }
 
 /**************************

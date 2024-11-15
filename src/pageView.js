@@ -1,6 +1,7 @@
 import TodoController from './todoController.js';
 import edit from './images/edit.png';
 import trash from './images/trash.png';
+import arrow from './images/arrow.png';
 
 function createHeader(title) {
     const header = document.createElement('h1');
@@ -22,6 +23,8 @@ function createTaskComponent(task) {
     const editImg = document.createElement('img');
     const deleteBtn = document.createElement('button');
     const deleteImg = document.createElement('img');
+    const expandBtn = document.createElement('button');
+    const expandImg = document.createElement('img');
 
     taskComponent.classList.add('task-component');
     completeLabel.classList.add('complete-label');
@@ -30,6 +33,8 @@ function createTaskComponent(task) {
     editImg.classList.add('task-img');
     deleteBtn.classList.add('task-btn');
     deleteImg.classList.add('task-img');
+    expandBtn.classList.add('task-btn');
+    expandImg.classList.add('task-img');
 
     completeLabel.setAttribute('for', 'task-complete');
     taskComplete.setAttribute('type', 'checkbox');
@@ -39,16 +44,19 @@ function createTaskComponent(task) {
     taskDate.textContent = task.dueDate;
     editImg.src = edit;
     deleteImg.src = trash;
+    expandImg.src = arrow;
 
     editBtn.appendChild(editImg);
     deleteBtn.appendChild(deleteImg);
+    expandBtn.appendChild(expandImg);
 
-    taskComponent.appendChild(completeLabel);
     taskComponent.appendChild(taskComplete);
+    taskComponent.appendChild(completeLabel);
     taskComponent.appendChild(taskTitle);
     taskComponent.appendChild(taskDate);
     taskComponent.appendChild(editBtn);
     taskComponent.appendChild(deleteBtn);
+    taskComponent.appendChild(expandBtn);
 
     return taskComponent;
 }
