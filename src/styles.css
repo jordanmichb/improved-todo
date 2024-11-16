@@ -129,7 +129,7 @@ nav h2:not(:first-child) {
     width: calc(100% - 18rem);
     margin-left: 18rem;
     padding: 20px 5%;
-    overflow: hidden;
+    /* overflow: hidden; */
     /* transition: margin-left 500ms, width 500ms; */
 }
 
@@ -272,6 +272,7 @@ nav h2:not(:first-child) {
     #sidebar {
         transform: translateX(-18rem);
         transition: margin-left 500ms;
+        min-height: calc(100% - 50px);
     }
 
 
@@ -282,6 +283,7 @@ nav h2:not(:first-child) {
     #main {
         margin-left: 0;
         width: 100%;
+        min-height: calc(100% - 50px);
     }
 
     header {
