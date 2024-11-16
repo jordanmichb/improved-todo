@@ -8,8 +8,8 @@ function Project(title, dueDate = '') {
 }
 
 
-Project.prototype.addTask = function(title, description, dueDate, priority, notes) {
-    const task = new Task(title, description, dueDate, priority, notes);
+Project.prototype.addTask = function(title, description, dueDate, priority, notes, complete) {
+    const task = new Task(title, description, dueDate, priority, notes, complete);
     this.tasks.push(task);
 }
 

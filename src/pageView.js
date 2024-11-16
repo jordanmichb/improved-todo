@@ -37,7 +37,8 @@ function createTaskComponent(task) {
     expandImg.classList.add('task-img');
 
     completeLabel.setAttribute('for', 'task-complete');
-    taskComplete.setAttribute('type', 'checkbox');
+    taskComplete.type = 'checkbox';
+    if (task.complete) { taskComplete.checked = true }
 
     taskComplete.id = 'task-complete';
     taskTitle.textContent = task.title;
