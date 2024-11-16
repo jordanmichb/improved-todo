@@ -2,6 +2,9 @@ import TodoController from './todoController.js';
 import { createProjectView, createTaskView, createTodayView, createUpcomingView } from './pageView.js';
 
 const ScreenController = (function() {
+    const menuBtn = document.querySelector('#hamburger');
+    const sidebar = document.querySelector('#sidebar');
+
     const allBtn = document.querySelector('#all');
     const todayBtn = document.querySelector('#today');
     const upcomingBtn = document.querySelector('#upcoming');
@@ -17,7 +20,20 @@ const ScreenController = (function() {
     upcomingBtn.addEventListener('click', function() { loadView(createUpcomingView()) });
 
 
+    function setNav() {
+        const query = window.matchMedia('(max-width: 800px)');
+        // On larger screen, remove all styles reserved for smaller screen
+        if (!query.matches) {
+            menuBtn.classList.remove('active');
+            sidebar.classList.remove('open');
+        }
+    }
 
+
+    menuBtn.addEventListener('click', function() {
+        menuBtn.classList.toggle('active');
+        sidebar.classList.toggle('expand');
+    });
 
     createProjectBtn.addEventListener('click', function() {
         projectModal.style.visibility = 'visible';
@@ -69,6 +85,7 @@ const ScreenController = (function() {
     return {
         loadView,
         loadProjectList,
+        setNav,
     }
 })();
 
