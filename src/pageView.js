@@ -1,9 +1,8 @@
 import TodoController from './todoController.js';
+
 import edit from './images/edit.png';
 import trash from './images/trash.png';
 import arrow from './images/arrow.png';
-import Task from "./task";
-import ScreenController from './screenController.js';
 
 function createHeader(title) {
     const header = document.createElement('h1');
@@ -41,9 +40,8 @@ function createTaskComponent(task, i) {
     completeLabel.setAttribute('for', 'task-complete');
     taskComplete.type = 'checkbox';
     taskComplete.onclick = function() { 
-        console.log(task);
-        //task.complete = !task.complete;
-        //task.editTask(task.title, task.description, task.dueDate, task.priority, task.complete) 
+        task.complete = !task.complete 
+        TodoController.updateStorage();
     }
     if (task.complete) { taskComplete.checked = true }
 

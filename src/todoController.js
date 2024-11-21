@@ -10,8 +10,8 @@ const TodoController = (function() {
     let upcomingTasks = [];
 
     setProjects();
-    //setTodayTasks();
-    //setUpcomingTasks();
+    setTodayTasks();
+    setUpcomingTasks();
 
     function setProjects() {
         if (!StorageController.get('projects')) {
@@ -25,8 +25,8 @@ const TodoController = (function() {
             const fakeProject2 = new Project('Project2');
             fakeProject2.addTask('Task2', 'description', '11/21/2024', 'priority');
             fakeProject2.addTask('Task2.1', 'description', '11/16/2025', 'priority');
-            fakeProject2.addTask('Task2.2', 'description', '11/16/2024', 'priority');
-            fakeProject2.addTask('Task2.2', 'description', '11/14/2024', 'priority');
+            fakeProject2.addTask('Task2.2', 'description', '11/20/2024', 'priority');
+            fakeProject2.addTask('Task2.3', 'description', '11/14/2024', 'priority');
             projects.push(fakeProject2);
             StorageController.setStringify('projects', projects);
         }
@@ -54,6 +54,10 @@ const TodoController = (function() {
                                     && nextWeek - Date.parse(new Date(task.dueDate)) <= 604800000
                                   )
                                   .sort((taskA, taskB) => new Date(taskA.dueDate) - new Date(taskB.dueDate));
+    }
+
+    function updateStorage() {
+        StorageController.setStringify('projects', projects);
     }
 
     function createProject(title, dueDate) {
@@ -84,6 +88,7 @@ const TodoController = (function() {
     }
 
     return {
+        updateStorage,
         createProject,
         getProject,
         getProjects,
