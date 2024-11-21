@@ -2,6 +2,8 @@ import TodoController from './todoController.js';
 import edit from './images/edit.png';
 import trash from './images/trash.png';
 import arrow from './images/arrow.png';
+import Task from "./task";
+import ScreenController from './screenController.js';
 
 function createHeader(title) {
     const header = document.createElement('h1');
@@ -11,7 +13,7 @@ function createHeader(title) {
     return header;
 }
 
-function createTaskComponent(task) {
+function createTaskComponent(task, i) {
     const taskComponent = document.createElement('div');
 
     const completeLabel = document.createElement('label');
@@ -38,9 +40,15 @@ function createTaskComponent(task) {
 
     completeLabel.setAttribute('for', 'task-complete');
     taskComplete.type = 'checkbox';
+    taskComplete.onclick = function() { 
+        console.log(task);
+        //task.complete = !task.complete;
+        //task.editTask(task.title, task.description, task.dueDate, task.priority, task.complete) 
+    }
     if (task.complete) { taskComplete.checked = true }
 
     taskComplete.id = 'task-complete';
+    taskComplete.dataset.task = i;
     taskTitle.textContent = task.title;
     taskDate.textContent = task.dueDate;
     editImg.src = edit;
@@ -105,8 +113,8 @@ function createTaskView() {
 
     const tasks = TodoController.getTasks();
 
-    for (const task of tasks) {
-        view.appendChild(createTaskComponent(task));
+    for (let i = 0; i < tasks.length; i++) {
+        view.appendChild(createTaskComponent(tasks[i], i));
     }
     
     /*

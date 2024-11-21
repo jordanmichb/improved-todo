@@ -56,6 +56,10 @@ const ScreenController = (function() {
         projectModal.style.visibility = 'hidden';
 
     });
+    /*
+    function toggleTaskComplete(e) {
+        console.log(e.target.dataset.task)
+    }*/
     
 
     function loadView(view = createTaskView()) {
@@ -83,6 +87,7 @@ const ScreenController = (function() {
 
 
     return {
+        //toggleTaskComplete,
         loadView,
         loadProjectList,
         setNav,

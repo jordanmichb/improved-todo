@@ -10,23 +10,23 @@ const TodoController = (function() {
     let upcomingTasks = [];
 
     setProjects();
-    setTodayTasks();
-    setUpcomingTasks();
+    //setTodayTasks();
+    //setUpcomingTasks();
 
     function setProjects() {
         if (!StorageController.get('projects')) {
             const fakeProject = new Project('Project1', '11/8/2024');
-            fakeProject.addTask('This task name is going to be really really really long as an example to show how it will display on screen', 'description', '11/14/2024', 'priority', 'notes');
-            fakeProject.addTask('Task1.2', 'description', '12/15/2024', 'priority', 'notes', true);
-            fakeProject.addTask('Task1.3', 'description', '10/18/2024', 'priority', 'notes');
-            fakeProject.addTask('Task1.4', 'description', '11/13/2024', 'priority', 'notes');
+            fakeProject.addTask('This task name is going to be really really really long as an example to show how it will display on screen', 'description', '11/14/2024', 'priority');
+            fakeProject.addTask('Task1.2', 'description', '12/15/2024', 'priority', true);
+            fakeProject.addTask('Task1.3', 'description', '10/18/2024', 'priority');
+            fakeProject.addTask('Task1.4', 'description', '11/13/2024', 'priority');
             projects.push(fakeProject);
     
             const fakeProject2 = new Project('Project2');
-            fakeProject2.addTask('Task2', 'description', '11/21/2024', 'priority', 'notes');
-            fakeProject2.addTask('Task2.1', 'description', '11/16/2025', 'priority', 'notes');
-            fakeProject2.addTask('Task2.2', 'description', '11/16/2024', 'priority', 'notes');
-            fakeProject2.addTask('Task2.2', 'description', '11/14/2024', 'priority', 'notes');
+            fakeProject2.addTask('Task2', 'description', '11/21/2024', 'priority');
+            fakeProject2.addTask('Task2.1', 'description', '11/16/2025', 'priority');
+            fakeProject2.addTask('Task2.2', 'description', '11/16/2024', 'priority');
+            fakeProject2.addTask('Task2.2', 'description', '11/14/2024', 'priority');
             projects.push(fakeProject2);
             StorageController.setStringify('projects', projects);
         }
