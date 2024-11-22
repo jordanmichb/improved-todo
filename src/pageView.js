@@ -25,6 +25,9 @@ function createTaskComponent(task, i) {
     const deleteBtn = document.createElement('button');
     const deleteImg = document.createElement('img');
     const expandBtn = document.createElement('button');
+    //const expandImg = document.createElement('img');
+    const expand = document.createElement('input');
+    const expandLabel = document.createElement('label');
     const expandImg = document.createElement('img');
 
     taskComponent.classList.add('task-component');
@@ -37,7 +40,7 @@ function createTaskComponent(task, i) {
     expandBtn.classList.add('task-btn');
     expandImg.classList.add('task-img');
 
-    completeLabel.setAttribute('for', 'task-complete');
+    completeLabel.setAttribute('for', `task-complete-${i}`);
     taskComplete.type = 'checkbox';
     taskComplete.onclick = function() { 
         task.complete = !task.complete 
@@ -45,17 +48,24 @@ function createTaskComponent(task, i) {
     }
     if (task.complete) { taskComplete.checked = true }
 
-    taskComplete.id = 'task-complete';
+    taskComplete.id = `task-complete-${i}`;
     taskComplete.dataset.task = i;
     taskTitle.textContent = task.title;
     taskDate.textContent = task.dueDate;
     editImg.src = edit;
     deleteImg.src = trash;
+
+    expand.id = `expand-task-${i}`;
+    expand.type = 'checkbox';
+    expand.classList.add('expand-task');
+    expandLabel.setAttribute('for', `expand-task-${i}`)
     expandImg.src = arrow;
+    //expandImg.dataset.task = i;
 
     editBtn.appendChild(editImg);
     deleteBtn.appendChild(deleteImg);
-    expandBtn.appendChild(expandImg);
+    //expandBtn.appendChild(expandImg);
+    expandLabel.appendChild(expandImg);
 
     taskComponent.appendChild(taskComplete);
     taskComponent.appendChild(completeLabel);
@@ -63,7 +73,13 @@ function createTaskComponent(task, i) {
     taskComponent.appendChild(taskDate);
     taskComponent.appendChild(editBtn);
     taskComponent.appendChild(deleteBtn);
-    taskComponent.appendChild(expandBtn);
+    //taskComponent.appendChild(expandBtn);
+    taskComponent.appendChild(expandLabel);
+    taskComponent.appendChild(expand);
+
+    const titleInput = document.createElement('input');
+    titleInput.classList.add('edit-title-input')
+    taskComponent.appendChild(titleInput);
 
     return taskComponent;
 }

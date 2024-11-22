@@ -165,12 +165,31 @@ nav h2:not(:first-child) {
 
 .task-component {
     width: 100%;
+    max-height: 25px;
+    overflow: hidden;
+    transition: all .3s;
+    border-bottom: 1px solid gray;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
+    gap: 5px;
+}
+
+/* .task-component {
+    width: 100%;
     border-bottom: 1px solid gray;
     padding-bottom: 5px;
     margin-bottom: 15px;
     display: flex;
     align-items: center;
     gap: 5px;
+} */
+
+.task-component.expand {
+    height: 400px;
 }
 
 .task-component p:first-of-type {
@@ -189,6 +208,18 @@ nav h2:not(:first-child) {
     padding: 0;
     border: none;
     margin: 0 3px;
+}
+
+.expand-task {
+    display: none;
+}
+
+.task-component:has(.expand-task:checked) {
+    max-height: 100px;
+}
+
+.complete-label {
+    display: none;
 }
 
 /**************************
