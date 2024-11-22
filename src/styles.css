@@ -10,7 +10,7 @@
 }
 
 body {
-    min-height: 650px;
+    min-height: 600px;
     position: relative;
     border: 1px solid yellow;
 }
@@ -69,10 +69,12 @@ header {
 ******************************/
 #sidebar {
     border: 1px solid blue;
-    min-height: 100%;
+    height: 100%;
     width: var(--sidebar-width);
     position: absolute;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 #user {
@@ -101,6 +103,7 @@ header {
 }
 
 nav {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -117,11 +120,11 @@ nav h2:not(:first-child) {
 }
 
 #project-list {
+    flex: 1 1 0;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    max-height: 290px;
 }
 
 /**************************
@@ -129,7 +132,8 @@ nav h2:not(:first-child) {
 **************************/
 #main {
     border: 1px solid green;
-    min-height: 100vh;
+    min-height: 600px;
+    height: 100vh;
     width: calc(100% - var(--sidebar-width));
     margin-left: 18rem;
     padding: 20px 5%;
@@ -315,7 +319,7 @@ nav h2:not(:first-child) {
     #sidebar {
         transform: translateX(calc(-1 * var(--sidebar-width)));
         transition: margin-left 500ms;
-        min-height: calc(100% - var(--header-height));
+        height: calc(100% - var(--header-height));
     }
 
 
@@ -326,7 +330,8 @@ nav h2:not(:first-child) {
     #main {
         margin-left: 0;
         width: 100%;
-        min-height: calc(100% - var(--header-height));
+        min-height: calc(600px - var(--header-height));
+        height: calc(100vh - var(--header-height));
     }
 
     header {
