@@ -114,8 +114,8 @@ function createProjectView(idx) {
     view.appendChild(header);
     view.appendChild(btnContainer);
 
-    for (const task of project.tasks) {
-        view.appendChild(createTaskComponent(task));
+    for (let i = 0; i < project.tasks.length; i++) {
+        view.appendChild(createTaskComponent(project.tasks[i], i));
     }
 
     return view;
@@ -171,8 +171,8 @@ function createTodayView() {
     
     const tasks = TodoController.getTodayTasks();
     
-    for (const task of tasks) {
-        view.appendChild(createTaskComponent(task));
+    for (let i = 0; i < tasks.length; i++) {
+        view.appendChild(createTaskComponent(tasks[i], i));
     }
 
     return view;
@@ -188,8 +188,8 @@ function createUpcomingView() {
 
     const tasks = TodoController.getUpcomingTasks();
     
-    for (const task of tasks) {
-        view.appendChild(createTaskComponent(task));
+    for (let i = 0; i < tasks.length; i++) {
+        view.appendChild(createTaskComponent(tasks[i], i));
     }
 
     return view;
