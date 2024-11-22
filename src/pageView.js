@@ -12,6 +12,16 @@ function createHeader(title) {
     return header;
 }
 
+function createTaskComponentExpand() {
+    const expanded = document.createElement('div');
+    const titleInput = document.createElement('input');
+
+    titleInput.classList.add('edit-title-input')
+    expanded.appendChild(titleInput);
+
+    return expanded;
+}
+
 function createTaskComponent(task, i) {
     const taskComponent = document.createElement('div');
 
@@ -58,13 +68,12 @@ function createTaskComponent(task, i) {
     expand.id = `expand-task-${i}`;
     expand.type = 'checkbox';
     expand.classList.add('expand-task');
-    expandLabel.setAttribute('for', `expand-task-${i}`)
+    expandLabel.setAttribute('for', `expand-task-${i}`);
+    expandLabel.classList.add('expand-label');
     expandImg.src = arrow;
-    //expandImg.dataset.task = i;
 
     editBtn.appendChild(editImg);
     deleteBtn.appendChild(deleteImg);
-    //expandBtn.appendChild(expandImg);
     expandLabel.appendChild(expandImg);
 
     taskComponent.appendChild(taskComplete);
@@ -73,13 +82,9 @@ function createTaskComponent(task, i) {
     taskComponent.appendChild(taskDate);
     taskComponent.appendChild(editBtn);
     taskComponent.appendChild(deleteBtn);
-    //taskComponent.appendChild(expandBtn);
-    taskComponent.appendChild(expandLabel);
     taskComponent.appendChild(expand);
-
-    const titleInput = document.createElement('input');
-    titleInput.classList.add('edit-title-input')
-    taskComponent.appendChild(titleInput);
+    taskComponent.appendChild(expandLabel);
+    taskComponent.appendChild(createTaskComponentExpand());
 
     return taskComponent;
 }
