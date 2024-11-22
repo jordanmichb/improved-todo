@@ -202,7 +202,7 @@ nav h2:not(:first-child) {
     height: 19px;
 }
 
-.task-btn {
+.task-btn, .expand-label {
     padding: 0;
     border: none;
     margin: 0 3px;

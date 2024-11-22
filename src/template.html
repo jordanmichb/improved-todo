@@ -47,6 +47,33 @@
                 </div>
             </form>
         </div>
+        <div id="task-modal" class="modal-overlay">
+            <div class="modal">
+                <div class="modal-header">Add Task</div>
+                <form id="task-form">
+                    <label for="task-name">Name:</label>
+                    <input id="task-name" type="text" name="task-name" required>
+
+                    <label for="task-desc">Description:</label>
+                    <input id="task-desc" type="textarea" name="task-desc">
+
+                    <label for="task-due">Due Date:</label>
+                    <input id="task-due" type="date" name="task-due" required>
+
+                    <label for="task-priority">Priority:</label>
+                    <select id="task-priority" type="select" name="task-priority" required>
+                        <option value="green">Green</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="red">Red</option>
+                    </select>
+
+
+                    <div class="modal-btns">
+                        <button id="cancel-task">Cancel</button>
+                        <button id="add-task" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
     </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 import TodoController from './todoController.js';
+import ScreenController from './screenController.js';
 
 import edit from './images/edit.png';
 import trash from './images/trash.png';
@@ -6,6 +7,7 @@ import arrow from './images/arrow.png';
 
 function createHeader(title) {
     const header = document.createElement('h1');
+    header.id = 'view-header';
     header.classList.add('view-header');
     header.textContent = title;
 
@@ -24,18 +26,14 @@ function createTaskComponentExpand() {
 
 function createTaskComponent(task, i) {
     const taskComponent = document.createElement('div');
-
     const completeLabel = document.createElement('label');
     const taskComplete = document.createElement('input');
-
     const taskTitle = document.createElement('p');
     const taskDate = document.createElement('p');
     const editBtn = document.createElement('button');
     const editImg = document.createElement('img');
     const deleteBtn = document.createElement('button');
     const deleteImg = document.createElement('img');
-    const expandBtn = document.createElement('button');
-    //const expandImg = document.createElement('img');
     const expand = document.createElement('input');
     const expandLabel = document.createElement('label');
     const expandImg = document.createElement('img');
@@ -47,30 +45,30 @@ function createTaskComponent(task, i) {
     editImg.classList.add('task-img');
     deleteBtn.classList.add('task-btn');
     deleteImg.classList.add('task-img');
-    expandBtn.classList.add('task-btn');
     expandImg.classList.add('task-img');
+    expand.classList.add('expand-task');
+    expandLabel.classList.add('expand-label');
 
-    completeLabel.setAttribute('for', `task-complete-${i}`);
+    taskComplete.id = `task-complete-${i}`;
+    expand.id = `expand-task-${i}`;
+
+    taskComplete.dataset.task = i;
     taskComplete.type = 'checkbox';
+    expand.type = 'checkbox';
+    taskTitle.textContent = task.title;
+    taskDate.textContent = task.dueDate
+    editImg.src = edit;
+    deleteImg.src = trash;
+    expandImg.src = arrow;
+    
+    completeLabel.setAttribute('for', `task-complete-${i}`);
+    expandLabel.setAttribute('for', `expand-task-${i}`);
+    
     taskComplete.onclick = function() { 
         task.complete = !task.complete 
         TodoController.updateStorage();
     }
     if (task.complete) { taskComplete.checked = true }
-
-    taskComplete.id = `task-complete-${i}`;
-    taskComplete.dataset.task = i;
-    taskTitle.textContent = task.title;
-    taskDate.textContent = task.dueDate;
-    editImg.src = edit;
-    deleteImg.src = trash;
-
-    expand.id = `expand-task-${i}`;
-    expand.type = 'checkbox';
-    expand.classList.add('expand-task');
-    expandLabel.setAttribute('for', `expand-task-${i}`);
-    expandLabel.classList.add('expand-label');
-    expandImg.src = arrow;
 
     editBtn.appendChild(editImg);
     deleteBtn.appendChild(deleteImg);
@@ -89,9 +87,9 @@ function createTaskComponent(task, i) {
     return taskComponent;
 }
 
-function createProjectView(idx) {
+function createProjectView(i) {
     // Get the selected project
-    const project = TodoController.getProject(idx);
+    const project = TodoController.getProject(i);
 
     // Create the view container and header
     const view = document.createElement('div');
@@ -106,6 +104,8 @@ function createProjectView(idx) {
     btnContainer.classList.add('project-btns');
     addTaskBtn.classList.add('add-task');
 
+    //addTaskBtn.addEventListener('click')
+    header.dataset.project = i; 
     projectDue.textContent = project.dueDate;
     addTaskBtn.textContent = '+ Add task';
 

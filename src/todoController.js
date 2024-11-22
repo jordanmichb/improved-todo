@@ -63,7 +63,7 @@ const TodoController = (function() {
     function createProject(title, dueDate) {
         const project = new Project(title, dueDate);
         projects.push(project);
-        StorageController.setStringify('projects', projects);
+        updateStorage();
     }
 
     function getProject(idx) { 
