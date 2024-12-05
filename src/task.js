@@ -1,7 +1,8 @@
 // Use consructor so instances can share prototype
 // methods instead of each having its own copy
 
-function Task(name, description, dueDate, priority, complete = false) {
+function Task(parentProject, name, description, dueDate, priority, complete = false) {
+    this.parentProject = parentProject;
     this.name = name;
     this.description = description;
     this.dueDate = dueDate;

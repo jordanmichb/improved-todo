@@ -15,12 +15,12 @@ const StorageController = (function(){
     function getParsed(item) {
         // Get parsed JSON string
         const arr = JSON.parse(localStorage.getItem(item));
-        // Loop over all projects and all tthe project's tasks
+        // Loop over all projects and all the project's tasks
         for (let i = 0; i < arr.length; i++) {
             for (let j = 0; j < arr[i].tasks.length; j++) {
                 // For each task, convert to Task object
                 const t = arr[i].tasks[j];
-                arr[i].tasks[j] = new Task(t.name, t.description, t.dueDate, t.priority, t.complete);
+                arr[i].tasks[j] = new Task(arr[i].name, t.name, t.description, t.dueDate, t.priority, t.complete);
             }
             // For each project, convert to Project object
             arr[i] = new Project(arr[i].name, arr[i].dueDate, arr[i].tasks)
