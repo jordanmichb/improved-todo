@@ -28,17 +28,17 @@ const TodoController = (function() {
             fakeProject2.addTask('Task2.2', 'description', '11/20/2024', 'priority');
             fakeProject2.addTask('Task2.3', 'description', '11/14/2024', 'priority');
             projects.push(fakeProject2);
-            StorageController.setStringify('projects', projects);
+            StorageController.setAsString('projects', projects);
         }
         else {
             projects = StorageController.getParsed('projects');
         }
     }
 
-    /*******************************************************/
-    /* Filter for tasks due today by converting each dueDate
-    /* into a date string and comparing to today's date       
-    /*******************************************************/
+    /*******************************************************
+     * Filter for tasks due today by converting each dueDate
+     * into a date string and comparing to today's date       
+     *******************************************************/
     function setTodayTasks() {
         // Get today's date and set to readable format without time ie. 'Thu Nov 14 2024'
         const today = new Date().toDateString();
@@ -47,10 +47,10 @@ const TodoController = (function() {
                                 );
     }
 
-    /**********************************************/
-    /* Set the upcoming tasks array by filtering 
-    /* tasks by those that are due in the next week       
-    /**********************************************/
+    /**********************************************
+     * Set the upcoming tasks array by filtering 
+     * tasks by those that are due in the next week       
+     **********************************************/
     function setUpcomingTasks() {
         const today = new Date();
         // Parse returns ms since epoch
@@ -64,7 +64,7 @@ const TodoController = (function() {
     }
 
     function updateStorage() {
-        StorageController.setStringify('projects', projects);
+        StorageController.setAsString('projects', projects);
     }
 
     function createProject(name, dueDate) {

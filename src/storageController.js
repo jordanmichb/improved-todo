@@ -2,27 +2,16 @@ import Task from './task';
 import Project from './project';
 
 const StorageController = (function(){
-    function fromJSON(json) {
-        if (json.type === 'Task') {
-            console.log('is task')
-            return new Task(json.name, json.description, json.dueDate, json.priority, json.complete)
-        }
-        else if (json.type === 'Project') {
-            console.log('is project')
-            return new Project(json.name, json.dueDate, json.tasks)
-        }
-    }
-
     function get(item) {
         return localStorage.getItem(item);
     }
 
-    /************************************************************************************/
-    /* Retrieves JSON data from local storage and parses into JavaScript values
-    /* and objects. Since JSON cannot recognize most objects, each task of the task array 
-    /* is converted back into a Task object. Then each project is converted back into a 
-    /* Project object
-    /************************************************************************************/
+    /************************************************************************************
+     * Retrieves JSON data from local storage and parses into JavaScript values
+     * and objects. Since JSON cannot recognize most objects, each task of the task array 
+     * is converted back into a Task object. Then each project is converted back into a 
+     * Project object
+     ************************************************************************************/
     function getParsed(item) {
         // Get parsed JSON string
         const arr = JSON.parse(localStorage.getItem(item));
@@ -39,12 +28,19 @@ const StorageController = (function(){
 
         return arr;
     }
-
+    /************************************************
+     * Add key, item to storage, or update if exists 
+     ************************************************/
     function set(key, item) {
-        localStorage.setItem(key, JSON.stringify(item));
+        localStorage.setItem(key, item);
     }
 
-    function setStringify(key, item) {
+    /************************************************
+     * Add key, item to storage, or update if exists. 
+     * Storage only supports strings, so other data
+     * types need tot be converted
+     ************************************************/
+    function setAsString(key, item) {
         localStorage.setItem(key, JSON.stringify(item));
     }
 
@@ -52,7 +48,7 @@ const StorageController = (function(){
         get,
         getParsed,
         set,
-        setStringify
+        setAsString
     }
 })();
 

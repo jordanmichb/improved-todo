@@ -5,9 +5,9 @@ import edit from './images/edit.png';
 import trash from './images/trash.png';
 import arrow from './images/arrow.png';
 
-/*************************************/
-/* Create header for the page        */
-/*************************************/
+/*************************************
+ * Create header for the page        
+ *************************************/
 function createHeader(title) {
     const header = document.createElement('h1');
     header.id = 'view-header';
@@ -17,9 +17,9 @@ function createHeader(title) {
     return header;
 }
 
-/*********************************************************************/
-/* Create content to be shown when task component is expanded        */
-/*********************************************************************/
+/*********************************************************************
+ * Create content to be shown when task component is expanded        
+ *********************************************************************/
 function createTaskComponentExpand() {
     const expanded = document.createElement('div');
     const nameInput = document.createElement('input');
@@ -30,9 +30,9 @@ function createTaskComponentExpand() {
     return expanded;
 }
 
-/*************************************/
-/* Create a single task component    */
-/*************************************/
+/*************************************
+ * Create a single task component    
+ *************************************/
 function createTaskComponent(task, i) {
     const taskComponent = document.createElement('div');
     const completeLabel = document.createElement('label');
@@ -98,9 +98,9 @@ function createTaskComponent(task, i) {
     return taskComponent;
 }
 
-/*************************************************/
-/* Create page view for a specific project       */
-/*************************************************/
+/*************************************************
+ * Create page view for a specific project       
+ *************************************************/
 function createProjectView(i) {
     // Get the selected project
     const project = TodoController.getProject(i);
@@ -135,9 +135,9 @@ function createProjectView(i) {
     return view;
 }
 
-/*******************************************/
-/* Create view for showing all tasks       */
-/*******************************************/
+/*******************************************
+ * Create view for showing all tasks       
+ *******************************************/
 function createTaskView() {
     // Create the view container and header
     const view = document.createElement('div');
@@ -156,9 +156,9 @@ function createTaskView() {
     return view;
 }
 
-/***********************************************/
-/* Create view for showing today's tasks       */
-/***********************************************/
+/***********************************************
+ * Create view for showing today's tasks       
+ ***********************************************/
 function createTodayView() {
     const view = document.createElement('div');
     const header = createHeader('Today');
@@ -176,9 +176,9 @@ function createTodayView() {
     return view;
 }
 
-/************************************************/
-/* Create view for showing upcoming tasks       */
-/************************************************/
+/***********************************************
+ * Create view for showing upcoming tasks       
+ ***********************************************/
 function createUpcomingView() {
     const view = document.createElement('div');
     const header = createHeader('Upcoming');

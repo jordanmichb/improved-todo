@@ -25,16 +25,16 @@ const ScreenController = (function() {
     const editBtnsContainer = document.querySelector('#edit-task-btns');
     const cancelEditTaskBtn = document.querySelector('#cancel-edit-task');
     
-    /******************************************************/
-    /* For sidebar task view buttons                      */
-    /******************************************************/
+    /******************************************************
+     * For sidebar task view buttons                      
+     ******************************************************/
     allBtn.addEventListener('click', function() { loadView(createTaskView()) });
     todayBtn.addEventListener('click', function() { loadView(createTodayView()) });
     upcomingBtn.addEventListener('click', function() { loadView(createUpcomingView()) });
 
-    /******************************************************/
-    /* Controls how nav menu appears based on screen size */
-    /******************************************************/
+    /*****************************************************
+     * Controls how nav menu appears based on screen size 
+     *****************************************************/
     function setNav() {
         const query = window.matchMedia('(max-width: 800px)');
         // On larger screen, remove all styles reserved for smaller screen
@@ -44,26 +44,26 @@ const ScreenController = (function() {
         }
     }
 
-    /***********************************************************/
-    /* Toggle menu icon and sidebar expansion on small screen  */
-    /***********************************************************/
+    /***********************************************************
+     * Toggle menu icon and sidebar expansion on small screen  
+     ***********************************************************/
     menuBtn.addEventListener('click', function() {
         menuBtn.classList.toggle('active');
         sidebar.classList.toggle('expand');
     });
 
-    /******************************************************/
-    /* Load the main content based on view parameter      */
-    /******************************************************/
+    /******************************************************
+     * Load the main content based on view parameter      
+     ******************************************************/
     function loadView(view = createTaskView()) {
         const content = document.querySelector('#main');
         content.textContent = '';
         content.appendChild(view);
     }
 
-    /*********************************************/
-    /* Controls for creating a new project       */
-    /*********************************************/
+    /*********************************************
+     * Controls for creating a new project       
+     *********************************************/
 
     // Display modal for creating a new project
     createProjectBtn.addEventListener('click', function() {
@@ -94,9 +94,9 @@ const ScreenController = (function() {
 
     });
 
-    /******************************************************/
-    /* Get all projects and place them into the sidebar   */
-    /******************************************************/
+    /******************************************************
+     * Get all projects and place them into the sidebar   
+     ******************************************************/
     function loadProjectList() {
         const projectList = document.querySelector('#project-list');
         const projects = TodoController.getProjects();
@@ -117,9 +117,9 @@ const ScreenController = (function() {
         }
     }
 
-    /*********************************************/
-    /* Controls for creating a new task          */
-    /*********************************************/
+    /*********************************************
+     * Controls for creating a new task          
+     *********************************************/
 
     // If add task button is clicked, display modal
     // Event placed on document because this button is not always on scren
@@ -160,9 +160,9 @@ const ScreenController = (function() {
 
     });
 
-    /*********************************************/
-    /* Controls for editing a task               */
-    /*********************************************/
+    /*********************************************
+     * Controls for editing a task               
+     *********************************************/
 
     // When checkbox is toggled, task is set as complete or incomplete
     function addCompleteTaskEvent(checkbox, task) {
