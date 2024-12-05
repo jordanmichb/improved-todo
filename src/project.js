@@ -1,15 +1,15 @@
 import Task from "./task";
 
-function Project(title, dueDate = '', tasks = []) {
-    this.title = title;
+function Project(name, dueDate = '', tasks = []) {
+    this.name = name;
     this.dueDate = dueDate;
 
     this.tasks = tasks;
 }
 
 
-Project.prototype.addTask = function(title, description, dueDate, priority) {
-    const task = new Task(title, description, dueDate, priority);
+Project.prototype.addTask = function(name, description, dueDate, priority) {
+    const task = new Task(name, description, dueDate, priority);
     this.tasks.push(task);
 }
 

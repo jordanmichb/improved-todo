@@ -5,11 +5,11 @@ const StorageController = (function(){
     function fromJSON(json) {
         if (json.type === 'Task') {
             console.log('is task')
-            return new Task(json.title, json.description, json.dueDate, json.priority, json.complete)
+            return new Task(json.name, json.description, json.dueDate, json.priority, json.complete)
         }
         else if (json.type === 'Project') {
             console.log('is project')
-            return new Project(json.title, json.dueDate, json.tasks)
+            return new Project(json.name, json.dueDate, json.tasks)
         }
     }
 
@@ -17,12 +17,12 @@ const StorageController = (function(){
         return localStorage.getItem(item);
     }
 
-    /*
-    * Retrieves JSON data from local storage and parses into JavaScript values
-    * and objects. Since JSON cannot recognize most objects, each task of the task array 
-    * is converted back into a Task object. Then each project is converted back into a 
-    * Project object
-    */
+    /************************************************************************************/
+    /* Retrieves JSON data from local storage and parses into JavaScript values
+    /* and objects. Since JSON cannot recognize most objects, each task of the task array 
+    /* is converted back into a Task object. Then each project is converted back into a 
+    /* Project object
+    /************************************************************************************/
     function getParsed(item) {
         // Get parsed JSON string
         const arr = JSON.parse(localStorage.getItem(item));
@@ -31,10 +31,10 @@ const StorageController = (function(){
             for (let j = 0; j < arr[i].tasks.length; j++) {
                 // For each task, convert to Task object
                 const t = arr[i].tasks[j];
-                arr[i].tasks[j] = new Task(t.title, t.description, t.dueDate, t.priority, t.complete);
+                arr[i].tasks[j] = new Task(t.name, t.description, t.dueDate, t.priority, t.complete);
             }
             // For each project, convert to Project object
-            arr[i] = new Project(arr[i].title, arr[i].dueDate, arr[i].tasks)
+            arr[i] = new Project(arr[i].name, arr[i].dueDate, arr[i].tasks)
         }
 
         return arr;

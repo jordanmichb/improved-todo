@@ -5,6 +5,9 @@ import edit from './images/edit.png';
 import trash from './images/trash.png';
 import arrow from './images/arrow.png';
 
+/*************************************/
+/* Create header for the page        */
+/*************************************/
 function createHeader(title) {
     const header = document.createElement('h1');
     header.id = 'view-header';
@@ -14,21 +17,27 @@ function createHeader(title) {
     return header;
 }
 
+/*********************************************************************/
+/* Create content to be shown when task component is expanded        */
+/*********************************************************************/
 function createTaskComponentExpand() {
     const expanded = document.createElement('div');
-    const titleInput = document.createElement('input');
+    const nameInput = document.createElement('input');
 
-    titleInput.classList.add('edit-title-input')
-    expanded.appendChild(titleInput);
+    nameInput.classList.add('edit-name-input')
+    expanded.appendChild(nameInput);
 
     return expanded;
 }
 
+/*************************************/
+/* Create a single task component    */
+/*************************************/
 function createTaskComponent(task, i) {
     const taskComponent = document.createElement('div');
     const completeLabel = document.createElement('label');
     const taskComplete = document.createElement('input');
-    const taskTitle = document.createElement('p');
+    const taskName = document.createElement('p');
     const taskDate = document.createElement('p');
     const editBtn = document.createElement('button');
     const editImg = document.createElement('img');
@@ -43,11 +52,12 @@ function createTaskComponent(task, i) {
     taskComplete.classList.add('task-complete');
     editBtn.classList.add('task-btn');
     editImg.classList.add('task-img');
+    editImg.classList.add('edit-task');
     deleteBtn.classList.add('task-btn');
     deleteImg.classList.add('task-img');
-    expandImg.classList.add('task-img');
     expand.classList.add('expand-task');
     expandLabel.classList.add('expand-label');
+    expandImg.classList.add('task-img');
 
     taskComplete.id = `task-complete-${i}`;
     expand.id = `expand-task-${i}`;
@@ -55,7 +65,7 @@ function createTaskComponent(task, i) {
     taskComplete.dataset.task = i;
     taskComplete.type = 'checkbox';
     expand.type = 'checkbox';
-    taskTitle.textContent = task.title;
+    taskName.textContent = task.name;
     taskDate.textContent = task.dueDate
     editImg.src = edit;
     deleteImg.src = trash;
@@ -64,10 +74,11 @@ function createTaskComponent(task, i) {
     completeLabel.setAttribute('for', `task-complete-${i}`);
     expandLabel.setAttribute('for', `expand-task-${i}`);
     
-    taskComplete.onclick = function() { 
-        task.complete = !task.complete 
-        TodoController.updateStorage();
-    }
+    // Event for toggling "complete" checkbox
+    ScreenController.addCompleteTaskEvent(taskComplete, task);
+    // Event for editing the task
+    ScreenController.addEditTaskEvent(editImg, task);
+
     if (task.complete) { taskComplete.checked = true }
 
     editBtn.appendChild(editImg);
@@ -76,7 +87,7 @@ function createTaskComponent(task, i) {
 
     taskComponent.appendChild(taskComplete);
     taskComponent.appendChild(completeLabel);
-    taskComponent.appendChild(taskTitle);
+    taskComponent.appendChild(taskName);
     taskComponent.appendChild(taskDate);
     taskComponent.appendChild(editBtn);
     taskComponent.appendChild(deleteBtn);
@@ -87,13 +98,16 @@ function createTaskComponent(task, i) {
     return taskComponent;
 }
 
+/*************************************************/
+/* Create page view for a specific project       */
+/*************************************************/
 function createProjectView(i) {
     // Get the selected project
     const project = TodoController.getProject(i);
 
     // Create the view container and header
     const view = document.createElement('div');
-    const header = createHeader(project.title);
+    const header = createHeader(project.name);
     const projectDue = document.createElement('span');
     const btnContainer = document.createElement('div');
     const addTaskBtn = document.createElement('button');
@@ -121,6 +135,9 @@ function createProjectView(i) {
     return view;
 }
 
+/*******************************************/
+/* Create view for showing all tasks       */
+/*******************************************/
 function createTaskView() {
     // Create the view container and header
     const view = document.createElement('div');
@@ -135,32 +152,13 @@ function createTaskView() {
     for (let i = 0; i < tasks.length; i++) {
         view.appendChild(createTaskComponent(tasks[i], i));
     }
-    
-    /*
-    for (const project of projects) {
-        const projectComponent = document.createElement('div');
-        const projectHeader = document.createElement('div');
-        const projectTitle = document.createElement('h2');
-        const projectDueDate = document.createElement('p');
 
-        projectComponent.classList.add('project-component');
-        projectHeader.classList.add('project-header');
-        projectTitle.textContent = project.title;
-        projectDueDate.textContent = project.dueDate;
-
-        projectHeader.appendChild(projectTitle);
-        projectHeader.appendChild(projectDueDate);
-        projectComponent.appendChild(projectHeader);
-
-        for (const task of project.tasks) {
-            projectComponent.appendChild(createTaskComponent(task));
-        }
-
-        view.appendChild(projectComponent);
-    }*/
     return view;
 }
 
+/***********************************************/
+/* Create view for showing today's tasks       */
+/***********************************************/
 function createTodayView() {
     const view = document.createElement('div');
     const header = createHeader('Today');
@@ -178,6 +176,9 @@ function createTodayView() {
     return view;
 }
 
+/************************************************/
+/* Create view for showing upcoming tasks       */
+/************************************************/
 function createUpcomingView() {
     const view = document.createElement('div');
     const header = createHeader('Upcoming');
