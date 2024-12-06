@@ -1,44 +1,38 @@
 import TodoController from './todoController.js';
 import { getCurrentView, createProjectView, createTaskView, createTodayView, createUpcomingView, createCompletedView } from './pageView.js';
-import { validateAddTask, validateEditTask } from './formValidator.js';
+import { validateAddProject, validateAddTask, validateEditTask } from './formValidator.js';
 
 const ScreenController = (function() {
     const main = document.querySelector('#main');
-    const menuBtn = document.querySelector('#hamburger');
-    const sidebar = document.querySelector('#sidebar');
 
+    /******************************************************
+     * For sidebar task view buttons                      
+     ******************************************************/
     const allBtn = document.querySelector('#all');
     const todayBtn = document.querySelector('#today');
     const upcomingBtn = document.querySelector('#upcoming');
     const completedBtn = document.querySelector('#completed');
 
-    const createProjectBtn = document.querySelector('#create-project');
-    const projectModal = document.querySelector('#project-modal');
-    const projectForm = document.querySelector('#project-form');
-    const addProjectBtn = document.querySelector('#add-project');
-    const cancelProjectBtn = document.querySelector('#cancel-project');
-
-    const taskModal = document.querySelector('#add-task-modal');
-    const addTaskForm = document.querySelector('#add-task-form');
-    const addTaskBtn = document.querySelector('#add-task');
-    const cancelTaskBtn = document.querySelector('#cancel-task');
-
-    const editTaskModal = document.querySelector('#edit-task-modal');
-    const editTaskForm = document.querySelector('#edit-task-form');
-    const editBtnsContainer = document.querySelector('#edit-task-btns');
-    const cancelEditTaskBtn = document.querySelector('#cancel-edit-task');
-    
-    /******************************************************
-     * For sidebar task view buttons                      
-     ******************************************************/
     allBtn.addEventListener('click', function() { loadView(createTaskView()) });
     todayBtn.addEventListener('click', function() { loadView(createTodayView()) });
     upcomingBtn.addEventListener('click', function() { loadView(createUpcomingView()) });
     completedBtn.addEventListener('click', function() { loadView(createCompletedView()) });
 
+
+
+    /******************************************************
+     * Load the main content based on view parameter      
+     ******************************************************/
+    function loadView(view = createTaskView()) {
+        main.textContent = '';
+        main.appendChild(view);
+    }
+
+
+
     /*****************************************************
      * Controls main's height based on screen size since 
-     * it can't be known how many taskss there are and if they'll
+     * it can't be known how many tasks there are and if they'll
      * overflow. 
      *****************************************************/
     function setContentHeight() {
@@ -59,9 +53,15 @@ const ScreenController = (function() {
     // Properly set height when screen is resized
     window.addEventListener('resize', setContentHeight);
 
+
+
     /*****************************************************
-     * Controls how nav menu appears based on screen size 
+     * Controls for hamburber icon and sidebar 
      *****************************************************/
+    const menuBtn = document.querySelector('#hamburger');
+    const sidebar = document.querySelector('#sidebar');
+
+    // Controls how nav menu appears based on screen size
     function setNav() {
         const query = window.matchMedia('(max-width: 800px)');
         // On larger screen, remove all styles reserved for smaller screen
@@ -73,55 +73,13 @@ const ScreenController = (function() {
     // Properly set nav styles when screen is resized
     window.addEventListener('resize', setNav);
 
-    /***********************************************************
-     * Toggle menu icon and sidebar expansion on small screen  
-     ***********************************************************/
+    // Toggle menu icon and sidebar expansion on small screen
     menuBtn.addEventListener('click', function() {
         menuBtn.classList.toggle('active');
         sidebar.classList.toggle('expand');
     });
 
-    /******************************************************
-     * Load the main content based on view parameter      
-     ******************************************************/
-    function loadView(view = createTaskView()) {
-        const content = document.querySelector('#main');
-        content.textContent = '';
-        content.appendChild(view);
-    }
 
-    /*********************************************
-     * Controls for creating a new project       
-     *********************************************/
-
-    // Display modal for creating a new project
-    createProjectBtn.addEventListener('click', function() {
-        projectModal.style.visibility = 'visible';
-    });
-
-    // Submit info from modal to create a new project
-    addProjectBtn.addEventListener('click', function(e) {
-        // Stop page reload
-        e.preventDefault();
-        const name = document.querySelector('#project-name').value;
-        // Input comes as yyyy-mm-dd, format to mm/dd/yyy for display
-        const dateInput = document.querySelector('#project-due').value.split('-');
-        const dueDate = `${dateInput[1]}/${dateInput[2]}/${dateInput[0]}`;
-
-        TodoController.createProject(name, dueDate);
-        projectForm.reset();
-        projectModal.style.visibility = 'hidden';
-        // Reload project list to include newly added project
-        loadProjectList()
-    });
-
-    // Cancel creating new project
-    cancelProjectBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        projectForm.reset();
-        projectModal.style.visibility = 'hidden';
-
-    });
 
     /******************************************************
      * Get all projects and place them into the sidebar   
@@ -146,12 +104,74 @@ const ScreenController = (function() {
         }
     }
 
+
+
+    /*********************************************
+     * Controls for creating a new project       
+     *********************************************/
+    const createProjectBtn = document.querySelector('#create-project');
+    const projectModal = document.querySelector('#project-modal');
+    const projectForm = document.querySelector('#project-form');
+    const addProjectBtn = document.querySelector('#add-project');
+    const cancelProjectBtn = document.querySelector('#cancel-project');
+
+    const addProjectName = document.querySelector('#project-name');
+    
+    // Set styles for invalid form
+    addProjectBtn.addEventListener('click', function() {
+        if (addProjectName.value === '') { addProjectName.classList.add('invalid') }
+        else { addProjectName.classList.remove('invalid') }
+    });
+
+    addProjectName.addEventListener('input', function() {
+        if (addProjectName.value !== '') { addProjectName.classList.remove('invalid') }
+    });
+
+    // Display modal for creating a new project
+    createProjectBtn.addEventListener('click', function() {
+        projectModal.style.visibility = 'visible';
+    });
+
+    // Submit info from modal to create a new project
+    addProjectBtn.addEventListener('click', function(e) {
+        // Stop page reload
+        e.preventDefault();
+        if (!validateAddProject()) return;
+
+        const name = addProjectName.value;
+        // Input comes as yyyy-mm-dd, format to mm/dd/yyy for display
+        const dateInput = document.querySelector('#project-due').value.split('-');
+        const dueDate = `${dateInput[1]}/${dateInput[2]}/${dateInput[0]}`;
+
+        TodoController.createProject(name, dueDate);
+        projectForm.reset();
+        projectModal.style.visibility = 'hidden';
+        // Reload project list to include newly added project
+        loadProjectList()
+    });
+
+    // Cancel creating new project
+    cancelProjectBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        projectForm.reset();
+        projectModal.style.visibility = 'hidden';
+
+    });
+
+
+
     /*********************************************
      * Controls for creating a new task          
      *********************************************/
+    const taskModal = document.querySelector('#add-task-modal');
+    const addTaskForm = document.querySelector('#add-task-form');
+    const addTaskBtn = document.querySelector('#add-task');
+    const cancelTaskBtn = document.querySelector('#cancel-task');
+
     const addName = document.querySelector('#task-name');
     const addDue = document.querySelector('#task-due');
 
+    // Set styles for invalid form
     addTaskBtn.addEventListener('click', function() {
         if (addName.value === '') { addName.classList.add('invalid') }
         else { addName.classList.remove('invalid') }
@@ -165,7 +185,7 @@ const ScreenController = (function() {
 
     addDue.addEventListener('input', function() {
         if (addDue.value !== '') { addDue.classList.remove('invalid') }
-    })
+    });
 
     // If add task button is clicked, display modal
     // Event placed on document because this button is not always on scren
@@ -211,14 +231,22 @@ const ScreenController = (function() {
 
     });
 
+
+
     /*********************************************
      * Controls for editing a task               
      *********************************************/
+    const editTaskModal = document.querySelector('#edit-task-modal');
+    const editTaskForm = document.querySelector('#edit-task-form');
+    const editBtnsContainer = document.querySelector('#edit-task-btns');
+    const cancelEditTaskBtn = document.querySelector('#cancel-edit-task');
+
     const editName = document.querySelector('#edit-task-name');
     const editDesc = document.querySelector('#edit-task-desc');
     const editDue = document.querySelector('#edit-task-due');
     const editPriority = document.querySelector('#edit-task-priority');
 
+    // Set styles for invalid form
     editName.addEventListener('input', function() {
         if (editName.value === '') { editName.classList.add('invalid') }
         else { editName.classList.remove('invalid') }
@@ -307,12 +335,12 @@ const ScreenController = (function() {
     });
 
     return {
+        loadView,
+        setContentHeight,
+        setNav,
+        loadProjectList,
         addEditTaskEvent,
         addCompleteTaskEvent,
-        loadView,
-        loadProjectList,
-        setNav,
-        setContentHeight,
     }
 })();
 
