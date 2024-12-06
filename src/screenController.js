@@ -2,6 +2,7 @@ import TodoController from './todoController.js';
 import { createProjectView, createTaskView, createTodayView, createUpcomingView } from './pageView.js';
 
 const ScreenController = (function() {
+    const main = document.querySelector('#main');
     const menuBtn = document.querySelector('#hamburger');
     const sidebar = document.querySelector('#sidebar');
 
@@ -15,8 +16,8 @@ const ScreenController = (function() {
     const addProjectBtn = document.querySelector('#add-project');
     const cancelProjectBtn = document.querySelector('#cancel-project');
 
-    const taskModal = document.querySelector('#task-modal');
-    const taskForm = document.querySelector('#task-form');
+    const taskModal = document.querySelector('#add-task-modal');
+    const addTaskForm = document.querySelector('#add-task-form');
     const addTaskBtn = document.querySelector('#add-task');
     const cancelTaskBtn = document.querySelector('#cancel-task');
 
@@ -33,6 +34,29 @@ const ScreenController = (function() {
     upcomingBtn.addEventListener('click', function() { loadView(createUpcomingView()) });
 
     /*****************************************************
+     * Controls main's height based on screen size since 
+     * it can't be known how many taskss there are and if they'll
+     * overflow. 
+     *****************************************************/
+    function setContentHeight() {
+        const height = window.innerHeight;
+        // If window is below min height, set to auto so main will
+        // fill remaining space or contain tasks list, whichever is larger.
+        // If tasks list (scroll height) overflows main (client height) when
+        // window iss above min height, set to auto to contain tasks/
+        if (height < 600 || main.scrollHeight >= main.clientHeight) {
+            main.style.height = 'auto';
+        }
+        // If window height is greater than main height, stretch main to fit
+        if (height > main.clientHeight) {
+            main.style.height = '100vh';
+        }
+    }
+
+    // Properly set height when screen is resized
+    window.addEventListener('resize', setContentHeight);
+
+    /*****************************************************
      * Controls how nav menu appears based on screen size 
      *****************************************************/
     function setNav() {
@@ -40,9 +64,11 @@ const ScreenController = (function() {
         // On larger screen, remove all styles reserved for smaller screen
         if (!query.matches) {
             menuBtn.classList.remove('active');
-            sidebar.classList.remove('open');
+            sidebar.classList.remove('expand');
         }
     }
+    // Properly set nav styles when screen is resized
+    window.addEventListener('resize', setNav);
 
     /***********************************************************
      * Toggle menu icon and sidebar expansion on small screen  
@@ -129,7 +155,7 @@ const ScreenController = (function() {
     });
     
     // Submit info from modal to create a new task
-    addTaskBtn.addEventListener('click', function(e) {
+    addTaskForm.addEventListener('submit', function(e) {
         // Stop page reload
         e.preventDefault();
         const header = document.querySelector('#view-header');
@@ -146,7 +172,7 @@ const ScreenController = (function() {
 
         project.addTask(name, desc, dueDate, priority);
         TodoController.updateStorage();
-        taskForm.reset();
+        addTaskForm.reset();
         taskModal.style.visibility = 'hidden';
         // Reload project view to display newly added task
         loadView(createProjectView(projectIndex));
@@ -155,7 +181,7 @@ const ScreenController = (function() {
     // Cancel creating new task
     cancelTaskBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        taskForm.reset();
+        addTaskForm.reset();
         taskModal.style.visibility = 'hidden';
 
     });
@@ -200,7 +226,7 @@ const ScreenController = (function() {
             const editTaskSubmit = document.createElement('button');
             editTaskSubmit.id = 'edit-task-submit';
             editTaskSubmit.type = 'submit';
-            editTaskSubmit.textContent = 'Edit';
+            editTaskSubmit.textContent = 'Save';
             editTaskSubmit.addEventListener('click', function(e) { submitEditTask(e, task) });
 
             // Remove any previous task submit buttons and append the new one
@@ -242,6 +268,7 @@ const ScreenController = (function() {
         loadView,
         loadProjectList,
         setNav,
+        setContentHeight,
     }
 })();
 

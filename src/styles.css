@@ -133,11 +133,11 @@ nav h2:not(:first-child) {
 #main {
     border: 1px solid green;
     min-height: 600px;
-    height: 100vh;
+    /* height: auto; */
     width: calc(100% - var(--sidebar-width));
     margin-left: 18rem;
     padding: 20px 5%;
-    /* overflow: hidden; */
+    overflow: hidden;
     /* transition: margin-left 500ms, width 500ms; */
 }
 
@@ -168,28 +168,18 @@ nav h2:not(:first-child) {
 
 .task-component {
     width: 100%;
-    max-height: 25px;
+    max-height: 30px;
     overflow: hidden;
-    transition: all 500ms;
+    transition: max-height 500ms;
     border-bottom: 1px solid gray;
-    padding-bottom: 5px;
+    padding-bottom: 15px;
     margin-bottom: 15px;
     display: grid;
     grid-template-columns: 13px 1fr repeat(4, min-content);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: min-content 1fr;
     align-items: center;
     gap: 15px;
 }
-
-/* .task-component {
-    width: 100%;
-    border-bottom: 1px solid gray;
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-} */
 
 .task-component.expand {
     height: 400px;
@@ -231,6 +221,19 @@ nav h2:not(:first-child) {
 
 .complete-label {
     display: none;
+}
+
+.expanded-task-content {
+    grid-column: 2 / -1;
+    /* display: flex;
+    flex-direction: column;
+    gap: 15px; */
+    transition: visibility 500ms;
+    visibility: hidden;
+}
+
+.expand-task:checked ~ .expanded-task-content {
+    visibility: visible;
 }
 
 /**************************

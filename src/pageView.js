@@ -20,12 +20,19 @@ function createHeader(title) {
 /*********************************************************************
  * Create content to be shown when task component is expanded        
  *********************************************************************/
-function createTaskComponentExpand() {
+function createTaskComponentExpand(task) {
     const expanded = document.createElement('div');
-    const nameInput = document.createElement('input');
+    const parent = document.createElement('div');
+    const description = document.createElement('div');
 
-    nameInput.classList.add('edit-name-input')
-    expanded.appendChild(nameInput);
+    expanded.classList.add('expanded-task-content');
+    parent.classList.add('task-parent');
+    description.classList.add('task-description');
+
+    parent.textContent = `Project: ${task.parentProject}`;
+    description.textContent = `Description: ${task.description}`;
+
+    expanded.append(parent, description);
 
     return expanded;
 }
@@ -93,7 +100,7 @@ function createTaskComponent(task, i) {
     taskComponent.appendChild(deleteBtn);
     taskComponent.appendChild(expand);
     taskComponent.appendChild(expandLabel);
-    taskComponent.appendChild(createTaskComponentExpand());
+    taskComponent.appendChild(createTaskComponentExpand(task));
 
     return taskComponent;
 }

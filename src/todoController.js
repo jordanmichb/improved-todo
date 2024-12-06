@@ -16,7 +16,10 @@ const TodoController = (function() {
     function setProjects() {
         if (!StorageController.get('projects')) {
             const fakeProject = new Project('Project1', '11/8/2024');
-            fakeProject.addTask('This task name is going to be really really really long as an example to show how it will display on screen', 'description', '11/14/2024', 'priority');
+            fakeProject.addTask('This task name is going to be really really really long as an example to show how it will display on screen', 
+                'This task description is going to be really really really long as an example to show how it will display on screen. ' +
+                'Lorem ipsum odor amet, consectetuer adipiscing elit. Vitae velit parturient nullam dictum quisque in. Pharetra malesuada morbi primis diam ex sollicitudin! Placerat laoreet nisi congue taciti neque ante pulvinar at. Finibus fames blandit varius, nulla suscipit suspendisse sapien. Tincidunt ad libero mollis accumsan pellentesque mollis condimentum. Molestie sed fusce arcu orci posuere tortor faucibus hac. Mollis cras ullamcorper urna; egestas montes nulla vehicula sapien primis. Sit at molestie dapibus fames mi semper. Habitant faucibus dapibus convallis nec massa per. Quis in consectetur accumsan amet pharetra risus magna. Rutrum sapien eleifend netus placerat vestibulum mollis.', 
+                '11/14/2024', 'priority');
             fakeProject.addTask('Task1.2', 'description', '12/15/2024', 'priority', true);
             fakeProject.addTask('Task1.3', 'description', '11/22/2024', 'priority');
             fakeProject.addTask('Task1.4', 'description', '11/22/2024', 'priority');
