@@ -94,10 +94,11 @@ const ScreenController = (function() {
         for (let i = 0; i < projects.length; i++) {
             const button = document.createElement('button');
             button.textContent = projects[i].name;
-            button.dataset.project = i;
+            // Store project reference in button so it can be referenced later
+            button.project = projects[i];
             // When clicked, that project's page is displayed
             button.addEventListener('click', function(e) {
-                loadView(createProjectView(e.target.dataset.project));
+                loadView(createProjectView(e.target.project));
             })
 
             projectList.appendChild(button);
@@ -165,14 +166,14 @@ const ScreenController = (function() {
      *********************************************/
     const taskModal = document.querySelector('#add-task-modal');
     const addTaskForm = document.querySelector('#add-task-form');
-    const addTaskBtn = document.querySelector('#add-task');
+    const submitAddTask = document.querySelector('#add-task');
     const cancelTaskBtn = document.querySelector('#cancel-task');
 
     const addName = document.querySelector('#task-name');
     const addDue = document.querySelector('#task-due');
 
     // Set styles for invalid form
-    addTaskBtn.addEventListener('click', function() {
+    submitAddTask.addEventListener('click', function() {
         if (addName.value === '') { addName.classList.add('invalid') }
         else { addName.classList.remove('invalid') }
         if (addDue.value === '') { addDue.classList.add('invalid') }
@@ -195,15 +196,14 @@ const ScreenController = (function() {
     });
     
     // Submit info from modal to create a new task
-    addTaskBtn.addEventListener('click', function(e) {
+    submitAddTask.addEventListener('click', function(e) {
         // Stop page reload
         e.preventDefault();
         if (!validateAddTask()) return;
 
         const header = document.querySelector('#view-header');
-        // Get the current project
-        const projectIndex = header.dataset.project;
-        const project = TodoController.getProject(projectIndex);
+        // Get the current project sored in button
+        const project = submitAddTask.project;
         
         const name = addName.value;
         const desc = document.querySelector('#task-desc').value;
@@ -228,7 +228,6 @@ const ScreenController = (function() {
         e.preventDefault();
         addTaskForm.reset();
         taskModal.style.visibility = 'hidden';
-
     });
 
 
@@ -334,6 +333,51 @@ const ScreenController = (function() {
 
     });
 
+    /*********************************************
+     * Controls for deleting a task               
+     *********************************************/
+    const delTaskModal = document.querySelector('#del-task-modal');
+    const delBtnsContainer = document.querySelector('#del-task-btns');
+    const cancelDelTaskBtn = document.querySelector('#cancel-del-task');
+
+    function addDeleteTaskEvent(deleteBtn, task) {
+        deleteBtn.addEventListener('click', function() {
+            // Create submit button for each individual task, makes it easier to work
+            // on the task directly instead of searching for it in array
+            const delTaskSubmit = document.createElement('button');
+            delTaskSubmit.id = 'del-task-submit';
+            delTaskSubmit.textContent = 'Delete';
+            delTaskSubmit.addEventListener('click', function(e) { submitDeleteTask(e, task) });
+
+            // Remove any previous task delete buttons and append the new one
+            delBtnsContainer.removeChild(delBtnsContainer.lastChild);
+            delBtnsContainer.appendChild(delTaskSubmit);
+
+            delTaskModal.style.visibility = 'visible';
+        });
+
+        // Submit the task's changes and update in local storage
+        function submitDeleteTask(e, task) {
+            const taskId = task.id;
+            const project = task.parentProject;
+
+            project.deleteTask(taskId);
+
+            TodoController.setCompletedTasks();
+            TodoController.updateTasks();
+            TodoController.updateStorage();
+
+            delTaskModal.style.visibility = 'hidden';
+
+            loadView(getCurrentView());
+        }
+    }
+
+    // Cancel deleting task
+    cancelDelTaskBtn.addEventListener('click', function(e) {
+        delTaskModal.style.visibility = 'hidden';
+    });
+
     return {
         loadView,
         setContentHeight,
@@ -341,6 +385,7 @@ const ScreenController = (function() {
         loadProjectList,
         addEditTaskEvent,
         addCompleteTaskEvent,
+        addDeleteTaskEvent,
     }
 })();
 

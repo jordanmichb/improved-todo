@@ -17,13 +17,16 @@ const StorageController = (function(){
         const arr = JSON.parse(localStorage.getItem(item));
         // Loop over all projects and all the project's tasks
         for (let i = 0; i < arr.length; i++) {
+            // For each project, convert to Project object
+            const project = new Project(arr[i].name, arr[i].dueDate, arr[i].tasks);
+            arr[i] = project;
+
             for (let j = 0; j < arr[i].tasks.length; j++) {
                 // For each task, convert to Task object
                 const t = arr[i].tasks[j];
-                arr[i].tasks[j] = new Task(arr[i].name, t.name, t.description, t.dueDate, t.priority, t.complete);
+                arr[i].tasks[j] = new Task(project, t.name, t.description, t.dueDate, t.priority, t.complete);
             }
-            // For each project, convert to Project object
-            arr[i] = new Project(arr[i].name, arr[i].dueDate, arr[i].tasks)
+            
         }
 
         return arr;
@@ -41,7 +44,10 @@ const StorageController = (function(){
      * types need tot be converted
      ************************************************/
     function setAsString(key, item) {
-        localStorage.setItem(key, JSON.stringify(item));
+        localStorage.setItem(key, JSON.stringify(item, (key, value) => {
+            // Skip storing parent object to avoid circular structure
+            return key === 'parentProject' ? undefined : value; 
+        }));
     }
 
     return {

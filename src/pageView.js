@@ -5,7 +5,7 @@ import edit from './images/edit.png';
 import trash from './images/trash.png';
 import arrow from './images/arrow.png';
 
-let viewIndex;
+let viewProject;
 let currentView;
 
 /*************************************************
@@ -13,7 +13,7 @@ let currentView;
  * so the correct page can be loaded    
  *************************************************/
 function getCurrentView() {
-    if (viewIndex) { return currentView(viewIndex) };
+    if (viewProject) { return currentView(viewProject) };
     return currentView();
 }
 
@@ -41,7 +41,7 @@ function createTaskComponentExpand(task) {
     parent.classList.add('task-parent');
     description.classList.add('task-description');
 
-    parent.textContent = `Project: ${task.parentProject}`;
+    parent.textContent = `Project: ${task.parentProject.name}`;
     description.textContent = `Description: ${task.description}`;
 
     expanded.append(parent, description);
@@ -53,6 +53,7 @@ function createTaskComponentExpand(task) {
  * Create a single task component    
  *************************************/
 function createTaskComponent(task, i) {
+    console.log(task);
     const taskComponent = document.createElement('div');
     const completeLabel = document.createElement('label');
     const taskComplete = document.createElement('input');
@@ -71,7 +72,7 @@ function createTaskComponent(task, i) {
     taskComplete.classList.add('task-complete');
     editBtn.classList.add('task-btn');
     editImg.classList.add('task-img');
-    editImg.classList.add('edit-task');
+    //editImg.classList.add('edit-task');
     deleteBtn.classList.add('task-btn');
     deleteImg.classList.add('task-img');
     expand.classList.add('expand-task');
@@ -97,6 +98,8 @@ function createTaskComponent(task, i) {
     ScreenController.addCompleteTaskEvent(taskComplete, task);
     // Event for editing the task
     ScreenController.addEditTaskEvent(editImg, task);
+    // Event for deleting the task
+    ScreenController.addDeleteTaskEvent(deleteImg, task);
 
     if (task.complete) { taskComplete.checked = true }
 
@@ -120,9 +123,11 @@ function createTaskComponent(task, i) {
 /*************************************************
  * Create page view for a specific project       
  *************************************************/
-function createProjectView(i) {
+function createProjectView(project) {
     // Get the selected project
-    const project = TodoController.getProject(i);
+    // Store project reference in add button so it can be referenced later
+    const submitAddTask = document.querySelector('#add-task');
+    submitAddTask.project = project;
 
     // Create the view container and header
     const view = document.createElement('div');
@@ -137,8 +142,6 @@ function createProjectView(i) {
     btnContainer.classList.add('project-btns');
     addTaskBtn.classList.add('add-task');
 
-    //addTaskBtn.addEventListener('click')
-    header.dataset.project = i; 
     projectDue.textContent = project.dueDate;
     addTaskBtn.textContent = '+ Add task';
 
@@ -151,7 +154,7 @@ function createProjectView(i) {
         view.appendChild(createTaskComponent(project.tasks[i], i));
     }
 
-    viewIndex = i;
+    viewProject = project;
     currentView = createProjectView;
     return view;
 }
@@ -174,7 +177,7 @@ function createTaskView() {
         view.appendChild(createTaskComponent(tasks[i], i));
     }
 
-    viewIndex = undefined;
+    viewProject = undefined;
     currentView = createTaskView;
     return view;
 }
@@ -196,7 +199,7 @@ function createTodayView() {
         view.appendChild(createTaskComponent(tasks[i], i));
     }
 
-    viewIndex = undefined;
+    viewProject = undefined;
     currentView = createTodayView;
     return view;
 }
@@ -218,7 +221,7 @@ function createUpcomingView() {
         view.appendChild(createTaskComponent(tasks[i], i));
     }
 
-    viewIndex = undefined;
+    viewProject = undefined;
     currentView = createUpcomingView;
     return view;
 }
@@ -237,7 +240,7 @@ function createCompletedView() {
         view.appendChild(createTaskComponent(tasks[i], i));
     }
 
-    viewIndex = undefined;
+    viewProject = undefined;
     currentView = createCompletedView;
     return view;
 }
