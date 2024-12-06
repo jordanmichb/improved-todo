@@ -314,7 +314,8 @@ nav h2:not(:first-child) {
 }
 
 #edit-task-name.invalid,
-#edit-task-due.invalid {
+#edit-task-due.invalid,
+.modal form input.invalid {
     border: 1px solid red;
 }
 

@@ -8,10 +8,12 @@ const TodoController = (function() {
     let projects = [];
     let todayTasks = [];
     let upcomingTasks = [];
+    let completedTasks = [];
 
     setProjects();
     setTodayTasks();
     setUpcomingTasks();
+    setCompletedTasks();
 
     function setProjects() {
         if (!StorageController.get('projects')) {
@@ -66,6 +68,15 @@ const TodoController = (function() {
                                   .sort((taskA, taskB) => new Date(taskA.dueDate) - new Date(taskB.dueDate));
     }
 
+    function setCompletedTasks() {
+        completedTasks = getTasks().filter(task => task.complete);
+    }
+
+    function updateTasks() {
+        setTodayTasks();
+        setUpcomingTasks();
+    }
+
     function updateStorage() {
         StorageController.setAsString('projects', projects);
     }
@@ -97,7 +108,13 @@ const TodoController = (function() {
         return upcomingTasks;
     }
 
+    function getCompletedasks() {
+        return completedTasks;
+    }
+
     return {
+        updateTasks,
+        setCompletedTasks,
         updateStorage,
         createProject,
         getProject,
@@ -105,6 +122,7 @@ const TodoController = (function() {
         getTasks,
         getTodayTasks,
         getUpcomingTasks,
+        getCompletedasks,
     }
 })();
 

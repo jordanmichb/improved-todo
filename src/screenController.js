@@ -1,6 +1,6 @@
 import TodoController from './todoController.js';
-import { getCurrentView, createProjectView, createTaskView, createTodayView, createUpcomingView } from './pageView.js';
-import { validateEdit } from './formValidator.js';
+import { getCurrentView, createProjectView, createTaskView, createTodayView, createUpcomingView, createCompletedView } from './pageView.js';
+import { validateAddTask, validateEditTask } from './formValidator.js';
 
 const ScreenController = (function() {
     const main = document.querySelector('#main');
@@ -10,6 +10,7 @@ const ScreenController = (function() {
     const allBtn = document.querySelector('#all');
     const todayBtn = document.querySelector('#today');
     const upcomingBtn = document.querySelector('#upcoming');
+    const completedBtn = document.querySelector('#completed');
 
     const createProjectBtn = document.querySelector('#create-project');
     const projectModal = document.querySelector('#project-modal');
@@ -33,6 +34,7 @@ const ScreenController = (function() {
     allBtn.addEventListener('click', function() { loadView(createTaskView()) });
     todayBtn.addEventListener('click', function() { loadView(createTodayView()) });
     upcomingBtn.addEventListener('click', function() { loadView(createUpcomingView()) });
+    completedBtn.addEventListener('click', function() { loadView(createCompletedView()) });
 
     /*****************************************************
      * Controls main's height based on screen size since 
@@ -147,6 +149,23 @@ const ScreenController = (function() {
     /*********************************************
      * Controls for creating a new task          
      *********************************************/
+    const addName = document.querySelector('#task-name');
+    const addDue = document.querySelector('#task-due');
+
+    addTaskBtn.addEventListener('click', function() {
+        if (addName.value === '') { addName.classList.add('invalid') }
+        else { addName.classList.remove('invalid') }
+        if (addDue.value === '') { addDue.classList.add('invalid') }
+        else { addDue.classList.remove('invalid') }
+    });
+
+    addName.addEventListener('input', function() {
+        if (addName.value !== '') { addName.classList.remove('invalid') }
+    });
+
+    addDue.addEventListener('input', function() {
+        if (addDue.value !== '') { addDue.classList.remove('invalid') }
+    })
 
     // If add task button is clicked, display modal
     // Event placed on document because this button is not always on scren
@@ -156,25 +175,30 @@ const ScreenController = (function() {
     });
     
     // Submit info from modal to create a new task
-    addTaskForm.addEventListener('submit', function(e) {
+    addTaskBtn.addEventListener('click', function(e) {
         // Stop page reload
         e.preventDefault();
+        if (!validateAddTask()) return;
+
         const header = document.querySelector('#view-header');
         // Get the current project
         const projectIndex = header.dataset.project;
         const project = TodoController.getProject(projectIndex);
         
-        const name = document.querySelector('#task-name').value;
+        const name = addName.value;
         const desc = document.querySelector('#task-desc').value;
         // Input comes as yyyy-mm-dd, format to mm/dd/yyyy for display
-        const dateInput = document.querySelector('#task-due').value.split('-');
+        const dateInput = addDue.value.split('-');
         const dueDate = `${dateInput[1]}/${dateInput[2]}/${dateInput[0]}`;
         const priority = document.querySelector('#task-priority').value;
 
         project.addTask(name, desc, dueDate, priority);
+        // Update list of today or upcoming tasks
+        TodoController.updateTasks();
         TodoController.updateStorage();
         addTaskForm.reset();
         taskModal.style.visibility = 'hidden';
+
         // Reload project view to display newly added task
         loadView(getCurrentView());
     });
@@ -196,27 +220,20 @@ const ScreenController = (function() {
     const editPriority = document.querySelector('#edit-task-priority');
 
     editName.addEventListener('input', function() {
-        if (editName.value === '') {
-            editName.classList.add('invalid');
-        }
-        else {
-            editName.classList.remove('invalid');
-        }
+        if (editName.value === '') { editName.classList.add('invalid') }
+        else { editName.classList.remove('invalid') }
     });
 
     editDue.addEventListener('input', function() {
-        if (editDue.value === '') {
-            editDue.classList.add('invalid');
-        }
-        else {
-            editDue.classList.remove('invalid');
-        }
+        if (editDue.value === '') { editDue.classList.add('invalid') }
+        else { editDue.classList.remove('invalid') }
     });
 
     // When checkbox is toggled, task is set as complete or incomplete
     function addCompleteTaskEvent(checkbox, task) {
         checkbox.addEventListener('click', function() { 
             task.complete = checkbox.checked ? true : false;
+            TodoController.setCompletedTasks();
             TodoController.updateStorage();
         });
     };
@@ -262,7 +279,7 @@ const ScreenController = (function() {
         // Submit the task's changes and update in local storage
         function submitEditTask(e, task) {
             e.preventDefault();
-            if (!validateEdit()) return;
+            if (!validateEditTask()) return;
             
             // Input comes as yyyy-mm-dd, format to mm/dd/yyyy for display
             const date = editDue.value.split('-');
@@ -270,6 +287,8 @@ const ScreenController = (function() {
 
             task.editTask(editName.value, editDesc.value, due, editPriority.value, task.complete);
 
+            // Update list of today or upcoming tasks
+            TodoController.updateTasks();
             TodoController.updateStorage();
             editTaskForm.reset();
 

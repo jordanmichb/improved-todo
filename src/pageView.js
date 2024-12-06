@@ -223,10 +223,30 @@ function createUpcomingView() {
     return view;
 }
 
+function createCompletedView() {
+    const view = document.createElement('div');
+    const header = createHeader('Completed');
+
+    view.id = 'content';
+
+    view.append(header);
+
+    const tasks = TodoController.getCompletedasks();
+
+    for (let i = 0; i < tasks.length; i++) {
+        view.appendChild(createTaskComponent(tasks[i], i));
+    }
+
+    viewIndex = undefined;
+    currentView = createCompletedView;
+    return view;
+}
+
 export { 
     getCurrentView,
     createProjectView,
     createTaskView,
     createTodayView,
     createUpcomingView,
+    createCompletedView,
 };
