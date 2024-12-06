@@ -1,6 +1,8 @@
 :root {
     --header-height: 50px;
     --sidebar-width: 18rem;
+
+    --modal-form-color: white;
 }
 
 * {
@@ -191,12 +193,14 @@ nav h2:not(:first-child) {
     text-overflow: ellipsis;
 }
 
-.task-btn, .task-img {
+.task-btn,
+.task-img {
     width: 19px;
     height: 19px;
 }
 
-.task-btn, .expand-label {
+.task-btn,
+.expand-label {
     padding: 0;
     border: none;
     margin: 0 3px;
@@ -286,12 +290,19 @@ nav h2:not(:first-child) {
     flex-direction: column;
 }
 
-.modal form input {
+.modal form input,
+.modal form select {
     padding: .5em 5px;
     margin-top: 5px;
     margin-bottom: 20px;
     border: 1px solid gray;
     border-radius: 5px;
+}
+
+.modal form input:focus {
+    /* border: 1px solid var(--modal-form-color); */
+    outline: none;
+    border: 1px solid blue;
 }
 
 .modal-btns {
@@ -302,7 +313,10 @@ nav h2:not(:first-child) {
     gap: 20px;
 }
 
-
+#edit-task-name.invalid,
+#edit-task-due.invalid {
+    border: 1px solid red;
+}
 
 /**************************
 * Media Queries

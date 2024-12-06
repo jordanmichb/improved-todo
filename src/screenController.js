@@ -1,5 +1,6 @@
 import TodoController from './todoController.js';
-import { createProjectView, createTaskView, createTodayView, createUpcomingView } from './pageView.js';
+import { getCurrentView, createProjectView, createTaskView, createTodayView, createUpcomingView } from './pageView.js';
+import { validateEdit } from './formValidator.js';
 
 const ScreenController = (function() {
     const main = document.querySelector('#main');
@@ -175,7 +176,7 @@ const ScreenController = (function() {
         addTaskForm.reset();
         taskModal.style.visibility = 'hidden';
         // Reload project view to display newly added task
-        loadView(createProjectView(projectIndex));
+        loadView(getCurrentView());
     });
 
     // Cancel creating new task
@@ -189,6 +190,28 @@ const ScreenController = (function() {
     /*********************************************
      * Controls for editing a task               
      *********************************************/
+    const editName = document.querySelector('#edit-task-name');
+    const editDesc = document.querySelector('#edit-task-desc');
+    const editDue = document.querySelector('#edit-task-due');
+    const editPriority = document.querySelector('#edit-task-priority');
+
+    editName.addEventListener('input', function() {
+        if (editName.value === '') {
+            editName.classList.add('invalid');
+        }
+        else {
+            editName.classList.remove('invalid');
+        }
+    });
+
+    editDue.addEventListener('input', function() {
+        if (editDue.value === '') {
+            editDue.classList.add('invalid');
+        }
+        else {
+            editDue.classList.remove('invalid');
+        }
+    });
 
     // When checkbox is toggled, task is set as complete or incomplete
     function addCompleteTaskEvent(checkbox, task) {
@@ -202,10 +225,10 @@ const ScreenController = (function() {
     // Each edit button is tied to a specific task so that the task
     // can be worked on directly instead of searching for it in array
     function addEditTaskEvent(editBtn, task) {
-        const name = document.querySelector('#edit-task-name');
+        /*const name = document.querySelector('#edit-task-name');
         const desc = document.querySelector('#edit-task-desc');
         const dueDate = document.querySelector('#edit-task-due');
-        const priority = document.querySelector('#edit-task-priority');
+        const priority = document.querySelector('#edit-task-priority');*/
 
         editBtn.addEventListener('click', function() {
             // List of priority options from "select" input
@@ -214,9 +237,9 @@ const ScreenController = (function() {
             const date = task.dueDate.split('/');
 
             // Add task's current info into input fields 
-            name.value = task.name;
-            desc.value = task.description;
-            dueDate.value = `${date[2]}-${date[0]}-${date[1]}`;
+            editName.value = task.name;
+            editDesc.value = task.description;
+            editDue.value = `${date[2]}-${date[0]}-${date[1]}`;
             priorityOpts.forEach((op) => {
                 if (op.value === task.priority) op.selected = true;
             })
@@ -238,19 +261,21 @@ const ScreenController = (function() {
 
         // Submit the task's changes and update in local storage
         function submitEditTask(e, task) {
-            //e.preventDefault();
+            e.preventDefault();
+            if (!validateEdit()) return;
+            
             // Input comes as yyyy-mm-dd, format to mm/dd/yyyy for display
-            const date = dueDate.value.split('-');
+            const date = editDue.value.split('-');
             const due = `${date[1]}/${date[2]}/${date[0]}`;
 
-            task.editTask(name.value, desc.value, due, priority.value, task.complete);
+            task.editTask(editName.value, editDesc.value, due, editPriority.value, task.complete);
 
             TodoController.updateStorage();
             editTaskForm.reset();
 
             editTaskModal.style.visibility = 'hidden';
 
-            //loadView(createProjectView(projectIndex));
+            loadView(getCurrentView());
         }
     };
 

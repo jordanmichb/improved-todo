@@ -5,6 +5,18 @@ import edit from './images/edit.png';
 import trash from './images/trash.png';
 import arrow from './images/arrow.png';
 
+let viewIndex;
+let currentView;
+
+/*************************************************
+ * Return the function to create the current view   
+ * so the correct page can be loaded    
+ *************************************************/
+function getCurrentView() {
+    if (viewIndex) { return currentView(viewIndex) };
+    return currentView();
+}
+
 /*************************************
  * Create header for the page        
  *************************************/
@@ -139,6 +151,8 @@ function createProjectView(i) {
         view.appendChild(createTaskComponent(project.tasks[i], i));
     }
 
+    viewIndex = i;
+    currentView = createProjectView;
     return view;
 }
 
@@ -160,6 +174,8 @@ function createTaskView() {
         view.appendChild(createTaskComponent(tasks[i], i));
     }
 
+    viewIndex = undefined;
+    currentView = createTaskView;
     return view;
 }
 
@@ -180,6 +196,8 @@ function createTodayView() {
         view.appendChild(createTaskComponent(tasks[i], i));
     }
 
+    viewIndex = undefined;
+    currentView = createTodayView;
     return view;
 }
 
@@ -200,10 +218,13 @@ function createUpcomingView() {
         view.appendChild(createTaskComponent(tasks[i], i));
     }
 
+    viewIndex = undefined;
+    currentView = createUpcomingView;
     return view;
 }
 
 export { 
+    getCurrentView,
     createProjectView,
     createTaskView,
     createTodayView,
