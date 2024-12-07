@@ -7,6 +7,7 @@ function Project(name, dueDate = '', tasks = []) {
     this.tasks = tasks;
 }
 
+// Binary search for task index
 Project.prototype.getTaskIndex = function(id) {
     let lower = 0;
     let upper = this.tasks.length - 1;

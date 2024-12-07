@@ -26,7 +26,6 @@ const StorageController = (function(){
                 const t = arr[i].tasks[j];
                 arr[i].tasks[j] = new Task(project, t.name, t.description, t.dueDate, t.priority, t.complete);
             }
-            
         }
 
         return arr;

@@ -53,8 +53,8 @@ function createTaskComponentExpand(task) {
  * Create a single task component    
  *************************************/
 function createTaskComponent(task, i) {
-    console.log(task);
     const taskComponent = document.createElement('div');
+    const priorityTag = document.createElement('div');
     const completeLabel = document.createElement('label');
     const taskComplete = document.createElement('input');
     const taskName = document.createElement('p');
@@ -68,11 +68,11 @@ function createTaskComponent(task, i) {
     const expandImg = document.createElement('img');
 
     taskComponent.classList.add('task-component');
+    priorityTag.classList.add('priority-tag')
     completeLabel.classList.add('complete-label');
     taskComplete.classList.add('task-complete');
     editBtn.classList.add('task-btn');
     editImg.classList.add('task-img');
-    //editImg.classList.add('edit-task');
     deleteBtn.classList.add('task-btn');
     deleteImg.classList.add('task-img');
     expand.classList.add('expand-task');
@@ -103,10 +103,13 @@ function createTaskComponent(task, i) {
 
     if (task.complete) { taskComplete.checked = true }
 
+    setPriorityColor(priorityTag, task);
+
     editBtn.appendChild(editImg);
     deleteBtn.appendChild(deleteImg);
     expandLabel.appendChild(expandImg);
 
+    taskComponent.appendChild(priorityTag);
     taskComponent.appendChild(taskComplete);
     taskComponent.appendChild(completeLabel);
     taskComponent.appendChild(taskName);
@@ -118,6 +121,12 @@ function createTaskComponent(task, i) {
     taskComponent.appendChild(createTaskComponentExpand(task));
 
     return taskComponent;
+}
+
+function setPriorityColor(tag, task) {
+    if (task.priority === 1) { tag.classList.add('low') }
+    else if (task.priority === 2) { tag.classList.add('medium') }
+    else if (task.priority === 3) { tag.classList.add('high') }
 }
 
 /*************************************************
