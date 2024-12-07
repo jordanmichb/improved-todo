@@ -124,9 +124,9 @@ function createTaskComponent(task, i) {
 }
 
 function setPriorityColor(tag, task) {
-    if (task.priority === 1) { tag.classList.add('low') }
-    else if (task.priority === 2) { tag.classList.add('medium') }
-    else if (task.priority === 3) { tag.classList.add('high') }
+    if (task.priority === '1') { tag.classList.add('low') }
+    else if (task.priority === '2') { tag.classList.add('medium') }
+    else if (task.priority === '3') { tag.classList.add('high') }
 }
 
 /*************************************************
