@@ -100,6 +100,8 @@ function createTaskComponent(task, i) {
     ScreenController.addEditTaskEvent(editImg, task);
     // Event for deleting the task
     ScreenController.addDeleteTaskEvent(deleteImg, task);
+    // Event for expanding the task
+    ScreenController.addExpandTaskEvent(expandImg, taskComponent);
 
     if (task.complete) { taskComplete.checked = true }
 

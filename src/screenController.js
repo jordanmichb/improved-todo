@@ -378,6 +378,27 @@ const ScreenController = (function() {
         delTaskModal.style.visibility = 'hidden';
     });
 
+
+
+    /*********************************************
+     * Controls for expanding a task               
+     *********************************************/
+    function addExpandTaskEvent(expandBtn, component) {
+        expandBtn.addEventListener('click', function() {
+            // If expanded, collapse
+            if (component.classList.contains('expand')) {
+                component.style.maxHeight = '30px';
+                component.classList.remove('expand');
+            }
+            // If collapsed, get height of inner content and expand to that height
+            else {
+                const size = component.scrollHeight;
+                component.style.maxHeight = size + 'px';
+                component.classList.add('expand');
+            }
+        })
+    }
+
     return {
         loadView,
         setContentHeight,
@@ -386,6 +407,7 @@ const ScreenController = (function() {
         addEditTaskEvent,
         addCompleteTaskEvent,
         addDeleteTaskEvent,
+        addExpandTaskEvent
     }
 })();
 

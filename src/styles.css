@@ -2,6 +2,11 @@
     --header-height: 50px;
     --sidebar-width: 18rem;
 
+    --header-bg-color: #99c1cb;
+    --sidebar-bg-color: #edf2f4;
+    --sidebar-button-color: white;
+    --body-bg-color: white;
+
     --modal-form-color: white;
 
     --low-priority-color: green;
@@ -18,7 +23,9 @@
 body {
     min-height: 600px;
     position: relative;
-    border: 1px solid yellow;
+    background-color: var(--body-bg-color);
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: .03em;
 }
 
 button {
@@ -34,12 +41,12 @@ button {
 * Header
 ******************************/
 header {
-    border: 1px solid red;
     padding: 0 20px;
     width: 100%;
     height: var(--header-height);
     display: none;
     align-items: center;
+    background-color: var(--header-bg-color);
 }
 
 #hamburger{ 
@@ -74,30 +81,32 @@ header {
 * Navigation sidebar
 ******************************/
 #sidebar {
-    border: 1px solid blue;
     height: 100%;
     width: var(--sidebar-width);
     position: absolute;
     padding: 20px;
     display: flex;
     flex-direction: column;
+    background-color: var(--sidebar-bg-color);
 }
 
 #user {
+    font-weight: bold;
+    font-size: 1.1rem;
     display: flex;
     justify-content: left;
     align-items: center;
-    gap: 7px;
+    gap: 15px;
     margin-bottom: 30px;
 }
 
 #user a {
-    height: 40px;
+    height: 50px;
 }
 
 #profile-pic {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     padding: 3px;
     border: 2px solid #dee2e6;
     border-radius: 50%;
@@ -121,6 +130,17 @@ nav h2 {
     padding-bottom: 10px;
 }
 
+nav button {
+    border: none;
+    letter-spacing: .05em;
+    /* font-size: 1.1rem; */
+    text-align: left;
+}
+
+nav button:hover {
+    background-color: var(--sidebar-button-color);
+}
+
 nav h2:not(:first-child) {
     margin-top: 30px;
 }
@@ -137,7 +157,6 @@ nav h2:not(:first-child) {
 * Main content
 **************************/
 #main {
-    border: 1px solid green;
     min-height: 600px;
     /* height: auto; */
     width: calc(100% - var(--sidebar-width));
@@ -187,9 +206,9 @@ nav h2:not(:first-child) {
     gap: 15px;
 }
 
-.task-component.expand {
+/* .task-component.expand {
     height: 400px;
-}
+} */
 
 .task-component p:first-of-type {
     text-wrap: nowrap;
@@ -241,7 +260,7 @@ nav h2:not(:first-child) {
 }
 
 .task-component:has(.expand-task:checked) {
-    max-height: 100px;
+    /* max-height: 100px; */
 }
 
 .complete-label {
