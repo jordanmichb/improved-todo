@@ -1,9 +1,9 @@
 import TodoController from './todoController.js';
 import ScreenController from './screenController.js';
 
-import edit from './images/edit.png';
+import edit from './images/edit.svg';
 import trash from './images/trash.png';
-import arrow from './images/arrow.png';
+import arrow from './images/arrow.svg';
 
 let viewProject;
 let currentView;
@@ -37,12 +37,18 @@ function createTaskComponentExpand(task) {
     const parent = document.createElement('div');
     const description = document.createElement('div');
 
+    const parentSpan = document.createElement('span');
+    const descSpan = document.createElement('span');
+
     expanded.classList.add('expanded-task-content');
     parent.classList.add('task-parent');
     description.classList.add('task-description');
 
-    parent.textContent = `Project: ${task.parentProject.name}`;
-    description.textContent = `Description: ${task.description}`;
+    parentSpan.textContent = 'Project: ';
+    descSpan.textContent = 'Description: ';
+
+    parent.append(parentSpan, task.parentProject.name);
+    description.append(descSpan, task.description);
 
     expanded.append(parent, description);
 
@@ -71,6 +77,7 @@ function createTaskComponent(task, i) {
     priorityTag.classList.add('priority-tag')
     completeLabel.classList.add('complete-label');
     taskComplete.classList.add('task-complete');
+    taskDate.classList.add('task-due')
     editBtn.classList.add('task-btn');
     editImg.classList.add('task-img');
     deleteBtn.classList.add('task-btn');
@@ -143,20 +150,20 @@ function createProjectView(project) {
     // Create the view container and header
     const view = document.createElement('div');
     const header = createHeader(project.name);
-    const projectDue = document.createElement('span');
+    // const projectDue = document.createElement('span');
     const btnContainer = document.createElement('div');
     const addTaskBtn = document.createElement('button');
 
     view.id = 'content';
 
-    projectDue.classList.add('project-due-header');
+    // projectDue.classList.add('project-due-header');
     btnContainer.classList.add('project-btns');
     addTaskBtn.classList.add('add-task');
 
-    projectDue.textContent = project.dueDate;
+    // projectDue.textContent = project.dueDate;
     addTaskBtn.textContent = '+ Add task';
 
-    header.appendChild(projectDue);
+    // header.appendChild(projectDue);
     btnContainer.appendChild(addTaskBtn);
     view.appendChild(header);
     view.appendChild(btnContainer);

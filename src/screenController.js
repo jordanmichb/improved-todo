@@ -296,9 +296,18 @@ const ScreenController = (function() {
             editTaskSubmit.textContent = 'Save';
             editTaskSubmit.addEventListener('click', function(e) { submitEditTask(e, task) });
 
+            // Create delete button for each task
+            const deleteTaskBtn = document.createElement('button');
+            deleteTaskBtn.id = 'delete-task';
+            deleteTaskBtn.textContent = 'Delete';
+            deleteTaskBtn.addEventListener('click', function(e) { showDeleteModal(e, task) });
+
             // Remove any previous task submit buttons and append the new one
+            editBtnsContainer.removeChild(editBtnsContainer.firstChild);
+            editBtnsContainer.prepend(deleteTaskBtn);
             editBtnsContainer.removeChild(editBtnsContainer.lastChild);
             editBtnsContainer.appendChild(editTaskSubmit);
+            
 
             editTaskModal.style.visibility = 'visible';
         });
@@ -319,6 +328,57 @@ const ScreenController = (function() {
             TodoController.updateStorage();
             editTaskForm.reset();
 
+            editTaskModal.style.visibility = 'hidden';
+
+            loadView(getCurrentView());
+        }
+
+        function showDeleteModal(e, task) {
+            e.preventDefault();
+            
+            const delTaskModal = document.querySelector('#del-task-modal');
+            const delBtnsContainer = document.querySelector('#del-task-btns');
+            const cancelDelTaskBtn = document.querySelector('#cancel-del-task');
+
+            const delTaskSubmit = document.createElement('button');
+            delTaskSubmit.id = 'del-task-submit';
+            delTaskSubmit.textContent = 'Delete';
+            delTaskSubmit.addEventListener('click', function(e) { submitDeleteTask(e, task) });
+
+            // Remove any previous task delete buttons and append the new one
+            delBtnsContainer.removeChild(delBtnsContainer.lastChild);
+            delBtnsContainer.appendChild(delTaskSubmit);
+
+            delTaskModal.style.visibility = 'visible';
+            /*
+            const taskId = task.id;
+            const project = task.parentProject;
+
+            project.deleteTask(taskId);
+
+            TodoController.setCompletedTasks();
+            TodoController.updateTasks();
+            TodoController.updateStorage();
+
+            delTaskModal.style.visibility = 'hidden';
+
+            loadView(getCurrentView());
+            */
+        }
+
+        function submitDeleteTask(e, task) {
+            e.preventDefault();
+
+            const taskId = task.id;
+            const project = task.parentProject;
+
+            project.deleteTask(taskId);
+
+            TodoController.setCompletedTasks();
+            TodoController.updateTasks();
+            TodoController.updateStorage();
+
+            delTaskModal.style.visibility = 'hidden';
             editTaskModal.style.visibility = 'hidden';
 
             loadView(getCurrentView());
@@ -387,7 +447,7 @@ const ScreenController = (function() {
         expandBtn.addEventListener('click', function() {
             // If expanded, collapse
             if (component.classList.contains('expand')) {
-                component.style.maxHeight = '30px';
+                component.style.maxHeight = '40px';
                 component.classList.remove('expand');
             }
             // If collapsed, get height of inner content and expand to that height
