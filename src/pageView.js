@@ -106,7 +106,7 @@ function createTaskComponent(task, i) {
     // Event for editing the task
     ScreenController.addEditTaskEvent(editImg, task);
     // Event for deleting the task
-    ScreenController.addDeleteTaskEvent(deleteImg, task);
+    //ScreenController.addDeleteTaskEvent(deleteImg, task);
     // Event for expanding the task
     ScreenController.addExpandTaskEvent(expandImg, taskComponent);
 
@@ -124,7 +124,7 @@ function createTaskComponent(task, i) {
     taskComponent.appendChild(taskName);
     taskComponent.appendChild(taskDate);
     taskComponent.appendChild(editBtn);
-    taskComponent.appendChild(deleteBtn);
+    // taskComponent.appendChild(deleteBtn);
     taskComponent.appendChild(expand);
     taskComponent.appendChild(expandLabel);
     taskComponent.appendChild(createTaskComponentExpand(task));

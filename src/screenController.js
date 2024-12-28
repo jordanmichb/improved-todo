@@ -238,7 +238,12 @@ const ScreenController = (function() {
     const editTaskModal = document.querySelector('#edit-task-modal');
     const editTaskForm = document.querySelector('#edit-task-form');
     const editBtnsContainer = document.querySelector('#edit-task-btns');
+    const editBtnsContainerInner = document.querySelector('#edit-task-btns div');
     const cancelEditTaskBtn = document.querySelector('#cancel-edit-task');
+
+    const delTaskModal = document.querySelector('#del-task-modal');
+    const delBtnsContainer = document.querySelector('#del-task-btns');
+    const cancelDelTaskBtn = document.querySelector('#cancel-del-task');
 
     const editName = document.querySelector('#edit-task-name');
     const editDesc = document.querySelector('#edit-task-desc');
@@ -303,10 +308,12 @@ const ScreenController = (function() {
             deleteTaskBtn.addEventListener('click', function(e) { showDeleteModal(e, task) });
 
             // Remove any previous task submit buttons and append the new one
-            editBtnsContainer.removeChild(editBtnsContainer.firstChild);
+            const del = document.querySelector('#delete-task');
+            if (del) editBtnsContainer.removeChild(del);
             editBtnsContainer.prepend(deleteTaskBtn);
-            editBtnsContainer.removeChild(editBtnsContainer.lastChild);
-            editBtnsContainer.appendChild(editTaskSubmit);
+            const sub = document.querySelector('#edit-task-submit');
+            if (sub) editBtnsContainerInner.removeChild(sub);
+            editBtnsContainerInner.appendChild(editTaskSubmit);
             
 
             editTaskModal.style.visibility = 'visible';
@@ -336,9 +343,7 @@ const ScreenController = (function() {
         function showDeleteModal(e, task) {
             e.preventDefault();
             
-            const delTaskModal = document.querySelector('#del-task-modal');
-            const delBtnsContainer = document.querySelector('#del-task-btns');
-            const cancelDelTaskBtn = document.querySelector('#cancel-del-task');
+            
 
             const delTaskSubmit = document.createElement('button');
             delTaskSubmit.id = 'del-task-submit';
@@ -393,9 +398,15 @@ const ScreenController = (function() {
 
     });
 
+    // Cancel deleting task
+    cancelDelTaskBtn.addEventListener('click', function(e) {
+        delTaskModal.style.visibility = 'hidden';
+    });
+
     /*********************************************
      * Controls for deleting a task               
      *********************************************/
+    /*
     const delTaskModal = document.querySelector('#del-task-modal');
     const delBtnsContainer = document.querySelector('#del-task-btns');
     const cancelDelTaskBtn = document.querySelector('#cancel-del-task');
@@ -437,6 +448,7 @@ const ScreenController = (function() {
     cancelDelTaskBtn.addEventListener('click', function(e) {
         delTaskModal.style.visibility = 'hidden';
     });
+*/
 
 
 
@@ -466,7 +478,6 @@ const ScreenController = (function() {
         loadProjectList,
         addEditTaskEvent,
         addCompleteTaskEvent,
-        addDeleteTaskEvent,
         addExpandTaskEvent
     }
 })();

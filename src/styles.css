@@ -4,6 +4,7 @@
 
     --header-bg-color: #eff1f6;
     --sidebar-bg-color: #eff1f6;
+    --sidebar-bg-color-dark: #6091b7;
     --sidebar-button-color: white;
     --body-bg-color: white;
     --box-shadow-color: rgb(225, 225, 225);
@@ -110,8 +111,11 @@ header {
     justify-content: left;
     align-items: center;
     gap: 15px;
-    margin-bottom: 50px;
     font-size: .9rem;
+    margin: -20px -20px 50px -20px;
+    padding: 10px 10px 10px 20px;
+    background-color: var(--sidebar-bg-color-dark);
+    color: #dee2e6;
 }
 
 #user a {
@@ -245,7 +249,7 @@ nav h2:not(:first-child) {
     /* padding-bottom: 15px; */
     margin-bottom: 15px;
     display: grid;
-    grid-template-columns: 3px 13px 1fr repeat(4, min-content);
+    grid-template-columns: 3px 13px 1fr repeat(3, min-content);
     grid-template-rows: min-content 1fr;
     align-items: center;
     gap: 15px;
@@ -418,6 +422,18 @@ nav h2:not(:first-child) {
 #edit-task-due.invalid,
 .modal form input.invalid {
     border: 1px solid red;
+}
+
+#edit-task-btns {
+    justify-content: space-between;
+}
+
+#delete-task {
+    background-color: rgb(255, 141, 141);
+}
+
+#cancel-edit-task {
+    margin-right: 20px;
 }
 
 /**************************
