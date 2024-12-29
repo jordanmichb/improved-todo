@@ -2,14 +2,18 @@
     --header-height: 50px;
     --sidebar-width: 18rem;
 
-    --header-bg-color: #eff1f6;
+    --header-bg-color: #d8e1f6;
     --sidebar-bg-color: #eff1f6;
-    --sidebar-bg-color-dark: #6091b7;
+    /* --sidebar-bg-color-dark: #ccd3e7; */
     --sidebar-button-color: white;
     --body-bg-color: white;
     --box-shadow-color: rgb(225, 225, 225);
 
     --modal-form-color: white;
+    --modal-button-color: #d8f6d5;
+    --modal-button-border: #aed3a2;
+    --delete-button-color: #f7d5d5;
+    --delete-button-border: #f29d9d;
 
     --low-priority-color: rgb(32, 184, 118);
     --medium-priority-color: rgb(255, 228, 74);
@@ -38,12 +42,18 @@ body {
 
 button {
     background: none;
-    padding: 7px;
+    padding: 7px 15px;
     font-size: 1rem;
     border-radius: 5px;
     border: 1px solid;
     cursor: pointer;
     color: var(--font-color);
+    box-shadow: 1px 1px 1px rgb(233, 233, 233);
+}
+
+button[type="submit"] {
+    background-color: var(--modal-button-color);
+    border: 1px solid var(--modal-button-border);
 }
 
 input[type="checkbox"], label[class="expand-label"] {
@@ -115,7 +125,7 @@ header {
     margin: -20px -20px 50px -20px;
     padding: 10px 10px 10px 20px;
     background-color: var(--sidebar-bg-color-dark);
-    color: #dee2e6;
+    /* color: #dee2e6; */
 }
 
 #user a {
@@ -126,7 +136,7 @@ header {
     width: 40px;
     height: 40px;
     padding: 3px;
-    border: 2px solid #dee2e6;
+    border: 1px solid rgb(147, 147, 147);
     border-radius: 50%;
     transition: box-shadow 500ms;
 }
@@ -153,12 +163,13 @@ nav > button, #project-list button {
     align-items: center;
     gap: 15px;
     border: none;
-    border-bottom: 1px solid var(--light-gray);
+    /* border-bottom: 1px solid var(--light-gray); */
     /* letter-spacing: .05em; */
     border-radius: 0;
     /* font-size: 1.1rem; */
     text-align: left;
     padding: 15px 0px 15px 10px;
+    box-shadow: none;
 }
 
 nav button:hover {
@@ -180,9 +191,9 @@ nav h2:not(:first-child) {
 }
 
 #create-project, .add-task {
-    border: 1px solid #e9cab4;
-    background-color: #ffe8d8;
-    padding: 5px 10px;
+    border: 1px solid var(--modal-button-border);
+    background-color: var(--modal-button-color);
+    padding: 5px 14px;
     border-radius: 15px;
     font-size: .8rem;
     /* color: rgb(96, 96, 96); */
@@ -214,8 +225,8 @@ nav h2:not(:first-child) {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 50px;
     font-size: 1.8rem;
     gap: 10px;
     letter-spacing: .05em;
@@ -291,6 +302,7 @@ nav h2:not(:first-child) {
 .task-img {
     width: 19px;
     height: 19px;
+    box-shadow: none;
 }
 
 .task-btn,
@@ -384,9 +396,11 @@ nav h2:not(:first-child) {
 }
 
 .modal-header {
-    border-bottom: 1px solid;
+
     padding: 20px;
     font-size: 1.7rem;
+    background-color: var(--header-bg-color);
+    border-radius: 5px 4px 0 0;
 }
 
 .modal form {
@@ -428,8 +442,9 @@ nav h2:not(:first-child) {
     justify-content: space-between;
 }
 
-#delete-task {
-    background-color: rgb(255, 141, 141);
+#delete-task, #del-task-submit {
+    background-color: var(--delete-button-color);
+    border: 1px solid var(--delete-button-border);
 }
 
 #cancel-edit-task {
