@@ -2,7 +2,7 @@
     --header-height: 50px;
     --sidebar-width: 18rem;
 
-    --header-bg-color: #d8e1f6;
+    --header-bg-color: #eff1f6;
     --sidebar-bg-color: #eff1f6;
     /* --sidebar-bg-color-dark: #ccd3e7; */
     --sidebar-button-color: white;
@@ -10,10 +10,12 @@
     --box-shadow-color: rgb(225, 225, 225);
 
     --modal-form-color: white;
-    --modal-button-color: #d8f6d5;
-    --modal-button-border: #aed3a2;
-    --delete-button-color: #f7d5d5;
-    --delete-button-border: #f29d9d;
+    --modal-btn-affirm: #d8f6d5;
+    --modal-border-affirm: #aed3a2;
+    --modal-btn-deny: #f7d5d5;
+    --modal-border-deny: #e9baba;
+    --modal-btn-neutral: #eff1f6;
+    --modal-border-neutral: #d7d9df;
 
     --low-priority-color: rgb(32, 184, 118);
     --medium-priority-color: rgb(255, 228, 74);
@@ -52,8 +54,13 @@ button {
 }
 
 button[type="submit"] {
-    background-color: var(--modal-button-color);
-    border: 1px solid var(--modal-button-border);
+    background-color: var(--modal-btn-affirm);
+    border: 1px solid var(--modal-border-affirm);
+}
+
+.cancel-btn {
+    background-color: var(--modal-btn-neutral);
+    border: 1px solid var(--modal-border-neutral);
 }
 
 input[type="checkbox"], label[class="expand-label"] {
@@ -191,8 +198,8 @@ nav h2:not(:first-child) {
 }
 
 #create-project, .add-task {
-    border: 1px solid var(--modal-button-border);
-    background-color: var(--modal-button-color);
+    border: 1px solid var(--modal-border-affirm);
+    background-color: var(--modal-btn-affirm);
     padding: 5px 14px;
     border-radius: 15px;
     font-size: .8rem;
@@ -432,6 +439,10 @@ nav h2:not(:first-child) {
     gap: 20px;
 }
 
+#del-task-btns {
+    border: none;
+}
+
 #edit-task-name.invalid,
 #edit-task-due.invalid,
 .modal form input.invalid {
@@ -443,8 +454,8 @@ nav h2:not(:first-child) {
 }
 
 #delete-task, #del-task-submit {
-    background-color: var(--delete-button-color);
-    border: 1px solid var(--delete-button-border);
+    background-color: var(--modal-btn-deny);
+    border: 1px solid var(--modal-border-deny);
 }
 
 #cancel-edit-task {

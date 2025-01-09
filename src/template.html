@@ -45,7 +45,7 @@
                 <label for="project-due">Due Date:</label>
                 <input id="project-due" type="date" name="project-due">
                 <div class="modal-btns">
-                    <button id="cancel-project">Cancel</button>
+                    <button id="cancel-project" class="cancel-btn">Cancel</button>
                     <button id="add-project" type="submit">Add</button>
                 </div>
             </form>
@@ -71,7 +71,7 @@
                     <option value="3">High</option>
                 </select>
                 <div class="modal-btns">
-                    <button id="cancel-task">Cancel</button>
+                    <button id="cancel-task" class="cancel-btn">Cancel</button>
                     <button id="add-task" type="submit">Add</button>
                 </div>
             </form>
@@ -98,7 +98,7 @@
                     <option class="pri-optn" value="3">High</option>
                 </select>
                 <div id="edit-task-btns" class="modal-btns">
-                    <div><button id="cancel-edit-task">Cancel</button></div>
+                    <div><button id="cancel-edit-task" class="cancel-btn">Cancel</button></div>
                 </div>
             </form>
         </div>
@@ -107,9 +107,11 @@
     <div id="del-task-modal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">Delete this task?</div>
-                <div id="del-task-btns" class="modal-btns">
-                    <button id="cancel-del-task">Cancel</button>
-                </div>
+                <form>
+                    <div id="del-task-btns" class="modal-btns">
+                        <button id="cancel-del-task" class="cancel-btn">Cancel</button>
+                    </div>
+                </form>
             </form>
         </div>
     </div>

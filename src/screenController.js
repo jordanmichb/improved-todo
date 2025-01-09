@@ -2,6 +2,8 @@ import TodoController from './todoController.js';
 import { getCurrentView, createProjectView, createTaskView, createTodayView, createUpcomingView, createCompletedView } from './pageView.js';
 import { validateAddProject, validateAddTask, validateEditTask } from './formValidator.js';
 
+import folder from './images/folder.svg';
+
 const ScreenController = (function() {
     const main = document.querySelector('#main');
 
@@ -92,8 +94,13 @@ const ScreenController = (function() {
 
         // For each project, create a functioning button for it and place onto screen
         for (let i = 0; i < projects.length; i++) {
+            const icon = document.createElement('img');
             const button = document.createElement('button');
+
+            icon.src = folder;
+
             button.textContent = projects[i].name;
+            button.prepend(icon);
             // Store project reference in button so it can be referenced later
             button.project = projects[i];
             // When clicked, that project's page is displayed
@@ -307,10 +314,11 @@ const ScreenController = (function() {
             deleteTaskBtn.textContent = 'Delete';
             deleteTaskBtn.addEventListener('click', function(e) { showDeleteModal(e, task) });
 
-            // Remove any previous task submit buttons and append the new one
+            // Remove any previous task delete/submit buttons and append the new one
             const del = document.querySelector('#delete-task');
             if (del) editBtnsContainer.removeChild(del);
             editBtnsContainer.prepend(deleteTaskBtn);
+
             const sub = document.querySelector('#edit-task-submit');
             if (sub) editBtnsContainerInner.removeChild(sub);
             editBtnsContainerInner.appendChild(editTaskSubmit);
