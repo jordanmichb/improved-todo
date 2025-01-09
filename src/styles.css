@@ -184,7 +184,6 @@ nav > button, #project-list button {
 }
 
 .project-title-wrapper {
-    pointer-events: none;
     overflow: hidden;
     text-wrap: nowrap;
     text-overflow: ellipsis;
@@ -242,6 +241,7 @@ nav h2:not(:first-child) {
 .view-header {
     display: flex;
     justify-content: center;
+    text-align: center;
     align-items: center;
     margin-top: 10px;
     margin-bottom: 50px;
