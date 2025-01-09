@@ -88,19 +88,23 @@ const ScreenController = (function() {
      ******************************************************/
     function loadProjectList() {
         const projectList = document.querySelector('#project-list');
+        
         const projects = TodoController.getProjects();
         // Remove any previous content
-        projectList.textContent = '';
+        //textWrapper.textContent = '';
 
         // For each project, create a functioning button for it and place onto screen
         for (let i = 0; i < projects.length; i++) {
-            const icon = document.createElement('img');
             const button = document.createElement('button');
+            const icon = document.createElement('img');
+            const textWrapper = document.createElement('div');
+
+            textWrapper.classList.add('project-title-wrapper');
 
             icon.src = folder;
 
-            button.textContent = projects[i].name;
-            button.prepend(icon);
+            textWrapper.textContent = projects[i].name;
+            button.append(icon, textWrapper);
             // Store project reference in button so it can be referenced later
             button.project = projects[i];
             // When clicked, that project's page is displayed

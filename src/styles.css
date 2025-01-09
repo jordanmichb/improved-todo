@@ -179,6 +179,17 @@ nav > button, #project-list button {
     box-shadow: none;
 }
 
+#project-list button img, .project-title-wrapper {
+    pointer-events: none;
+}
+
+.project-title-wrapper {
+    pointer-events: none;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+}
+
 nav button:hover {
     background-color: var(--sidebar-button-color);
 }
