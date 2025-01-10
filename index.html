@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Todo</title>
+<script defer src="main.js"></script></head>
+<body>
+    <header>
+        <button id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+        <aside id="sidebar">
+            <div id="user">
+                <a href="#" target="_blank"><img id="profile-pic" src="70594d623318e379200e.png" alt="Profile picture"></a>
+                <p id="user-name">Jordan Ballard</p>
+            </div>
+            <nav>
+                <h2>Tasks</h2>
+                <button id="all">All</button>
+                <button id="today">Today</button>
+                <button id="upcoming"><i class="fa-thin fa-calendar-week"></i>Upcoming</button>
+                <button id="completed">Completed</button>
+
+                <h2>Projects</h2>
+                <button id="create-project">+ Add New Project</button>
+                <div id="project-list"></div>
+            </nav>
+        </aside>
+        <main id="main">
+            
+        </main>
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">Add Project</div>
+            <form id="project-form">
+                <label for="project-name">Name:</label>
+                <input id="project-name" type="text" name="project-name" required>
+                <label for="project-due">Due Date:</label>
+                <input id="project-due" type="date" name="project-due">
+                <div class="modal-btns">
+                    <button id="cancel-project">Cancel</button>
+                    <button id="add-project" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="add-task-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">Add Task</div>
+            <form id="add-task-form">
+                <label for="task-name">Name:</label>
+                <input id="task-name" type="text" name="task-name" required>
+
+                <label for="task-desc">Description:</label>
+                <input id="task-desc" type="textarea" name="task-desc">
+
+                <label for="task-due">Due Date:</label>
+                <input id="task-due" type="date" name="task-due" required>
+
+                <label for="task-priority">Priority:</label>
+                <select id="task-priority" type="select" name="task-priority" required>
+                    <option value="1">Low</option>
+                    <option value="2">Medium</option>
+                    <option value="3">High</option>
+                </select>
+                <div class="modal-btns">
+                    <button id="cancel-task">Cancel</button>
+                    <button id="add-task" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="edit-task-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">Edit Task</div>
+            <form id="edit-task-form">
+                <label for="edit-task-name">Name:</label>
+                <input id="edit-task-name" type="text" name="edit-task-name" required>
+
+                <label for="edit-task-desc">Description:</label>
+                <input id="edit-task-desc" type="textarea" name="edit-task-desc">
+
+                <label for="edit-task-due">Due Date:</label>
+                <input id="edit-task-due" type="date" name="edit-task-due" required>
+
+                <label for="edit-task-priority">Priority:</label>
+                <select id="edit-task-priority" type="select" name="edit-task-priority" required>
+                    <option class="pri-optn" value="1">Low</option>
+                    <option class="pri-optn" value="2">Medium</option>
+                    <option class="pri-optn" value="3">High</option>
+                </select>
+                <div id="edit-task-btns" class="modal-btns">
+                    <button id="cancel-edit-task">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="del-task-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">Delete this task?</div>
+                <div id="del-task-btns" class="modal-btns">
+                    <button id="cancel-del-task">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
