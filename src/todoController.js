@@ -113,7 +113,7 @@ const TodoController = (function() {
         outOfRange.setDate(today.getDate() + 50);
 
         const templateProject = new Project('Prepare Presentation');
-        templateProject.addTask('Revise introduction', 'Current one is lame.', `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`, '1', true);
+        templateProject.addTask('Revise introduction', 'Current intro is lame.', `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`, '1', true);
         templateProject.addTask('Simplify slide layouts', 'Some slides are overcrowded or have unnecessary details.', `${withinWeek.getMonth() + 1}/${withinWeek.getDate()}/${withinWeek.getFullYear()}`, '1');
         templateProject.addTask('Add notes to each slide', 'Notes are needed as talking points for presenation audio.', `${withinWeek2.getMonth() + 1}/${withinWeek2.getDate()}/${withinWeek2.getFullYear()}`, '2');
         templateProject.addTask('Print handouts for attendees', 'Need 5 million.', `${outOfRange.getMonth() + 1}/${outOfRange.getDate()}/${outOfRange.getFullYear()}`, '3');
