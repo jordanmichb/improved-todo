@@ -88,6 +88,7 @@ const ScreenController = (function() {
      ******************************************************/
     function loadProjectList() {
         const projectList = document.querySelector('#project-list');
+        projectList.textContent = '';
         
         const projects = TodoController.getProjects();
 
@@ -150,8 +151,14 @@ const ScreenController = (function() {
 
         const name = addProjectName.value;
         // Input comes as yyyy-mm-dd, format to mm/dd/yyy for display
-        const dateInput = document.querySelector('#project-due').value.split('-');
-        const dueDate = `${dateInput[1]}/${dateInput[2]}/${dateInput[0]}`;
+        let dueDate = document.querySelector('#project-due');
+        if (!dueDate === '') {
+            const dateArr = document.querySelector('#project-due').value.split('-');
+            dueDate = `${dateArr[1]}/${dateArr[2]}/${dateArr[0]}`;
+        }
+        else { dueDate = '' }
+
+        console.log(dueDate)
 
         TodoController.createProject(name, dueDate);
         projectForm.reset();

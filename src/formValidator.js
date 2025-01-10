@@ -1,9 +1,7 @@
 function validateAddProject() {
     const name = document.querySelector('#project-name');
-    const dueDate = document.querySelector('#project-due');
     
     if (name.value === '') { return false }
-    if (dueDate.value === '') { return false }
     return true;
 }
 
