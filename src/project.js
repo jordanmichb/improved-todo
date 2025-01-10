@@ -29,9 +29,9 @@ Project.prototype.getTaskIndex = function(id) {
     return -1;
 }
 
-Project.prototype.addTask = function(taskName, description, dueDate, priority) {
+Project.prototype.addTask = function(taskName, description, dueDate, priority, complete) {
     // First param sets parent project
-    const task = new Task(this, taskName, description, dueDate, priority);
+    const task = new Task(this, taskName, description, dueDate, priority, complete);
     this.tasks.push(task);
 };
 

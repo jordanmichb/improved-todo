@@ -15,27 +15,14 @@ const TodoController = (function() {
     setUpcomingTasks();
     setCompletedTasks();
 
+    /*******************************************************
+     * If there are no projects in local storage, create some
+     * template projects as examples. Otherwise, get projects
+     * from local storage.       
+     *******************************************************/
     function setProjects() {
         if (!StorageController.get('projects')) {
-            const fakeProject = new Project('Prepare presentation for the presentation that we need to prepare', '11/8/2024');
-            const today = new Date();
-            //const today = `${d.getMonth()}/${d.getDate()}/${d.getFullYear()}`;
-
-            fakeProject.addTask('This task name is going to be really really really long as an example to show how it will display on screen', 
-                'This task description is going to be really really really long as an example to show how it will display on screen. ' +
-                'Lorem ipsum odor amet, consectetuer adipiscing elit. Vitae velit parturient nullam dictum quisque in. Pharetra malesuada morbi primis diam ex sollicitudin! Placerat laoreet nisi congue taciti neque ante pulvinar at. Finibus fames blandit varius, nulla suscipit suspendisse sapien. Tincidunt ad libero mollis accumsan pellentesque mollis condimentum. Molestie sed fusce arcu orci posuere tortor faucibus hac. Mollis cras ullamcorper urna; egestas montes nulla vehicula sapien primis. Sit at molestie dapibus fames mi semper. Habitant faucibus dapibus convallis nec massa per. Quis in consectetur accumsan amet pharetra risus magna. Rutrum sapien eleifend netus placerat vestibulum mollis.', 
-                `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`, '2');
-            fakeProject.addTask('Task1.2', 'description', `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`, '1');
-            fakeProject.addTask('Task1.3', 'description', '11/22/2024', '2');
-            fakeProject.addTask('Task1.4', 'description', `${today.getMonth() + 1}/${today.getDate() + 5}/${today.getFullYear()}`, '3');
-            projects.push(fakeProject);
-    
-            const fakeProject2 = new Project('Project2');
-            fakeProject2.addTask('Task2', 'description', `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`, '2');
-            fakeProject2.addTask('Task2.1', 'description', `${today.getMonth() + 1}/${today.getDate() + 2}/${today.getFullYear()}`, '3');
-            fakeProject2.addTask('Task2.2', 'description', '11/20/2024', '1');
-            fakeProject2.addTask('Task2.3', 'description', `${today.getMonth() + 1}/${today.getDate() + 7}/${today.getFullYear()}`, '1');
-            projects.push(fakeProject2);
+            setTemplateProjects();
             StorageController.setAsString('projects', projects);
         }
         else {
@@ -113,6 +100,30 @@ const TodoController = (function() {
 
     function getCompletedasks() {
         return completedTasks;
+    }
+
+    function setTemplateProjects() {
+        const today = new Date();
+        const withinWeek = new Date();
+        withinWeek.setDate(today.getDate() + 3);
+        const withinWeek2 = new Date();
+        withinWeek2.setDate(today.getDate() + 5);
+        const outOfRange = new Date();
+        outOfRange.setDate(today.getDate() + 50);
+
+        const templateProject = new Project('Prepare Presentation');
+        templateProject.addTask('Revise introduction', 'Current one is lame.', `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`, '1', true);
+        templateProject.addTask('Simplify slide layouts', 'Some slides are overcrowded or have unnecessary details.', `${withinWeek.getMonth() + 1}/${withinWeek.getDate()}/${withinWeek.getFullYear()}`, '1');
+        templateProject.addTask('Add notes to each slide', 'Notes are needed as talking points for presenation audio.', `${withinWeek2.getMonth() + 1}/${withinWeek2.getDate()}/${withinWeek2.getFullYear()}`, '2');
+        templateProject.addTask('Print handouts for attendees', 'Need 5 million.', `${outOfRange.getMonth() + 1}/${outOfRange.getDate()}/${outOfRange.getFullYear()}`, '3');
+        projects.push(templateProject);
+
+        const templateProject2 = new Project('Plan Vacation');
+        templateProject2.addTask('Choose destination', 'Anywhere but here.', `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`, '3', true);
+        templateProject2.addTask('Book Hotel', '5 star only!', `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`, '2', true);
+        templateProject2.addTask('Create itinerary', 'Should use an online template to make it organized.', `${withinWeek.getMonth() + 1}/${withinWeek.getDate()}/${withinWeek.getFullYear()}`, '1');
+        templateProject2.addTask('Book flights', 'Get the airline with the best food.', `${withinWeek2.getMonth() + 1}/${withinWeek2.getDate()}/${withinWeek2.getFullYear()}`, '1');
+        projects.push(templateProject2);
     }
 
     return {
