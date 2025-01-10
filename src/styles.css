@@ -440,8 +440,19 @@ nav h2:not(:first-child) {
 **************************/
 /* 500px and below */
 @media only screen and (max-width: 500px) {
-    #sidebar button {
+    nav h2 {
+        font-size: 1.3rem;
+    }
+    nav > button, #project-list button {
+        font-size: .9rem;
+    }
 
+    #create-project, .add-task {
+        font-size: .7rem;
+    }
+
+    #view-header {
+        font-size: 1.6rem;
     }
 
     .task-component {
