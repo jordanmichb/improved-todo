@@ -102,6 +102,7 @@ const TodoController = (function() {
         return completedTasks;
     }
 
+    // Create sample projects and tasks to populate todo list
     function setTemplateProjects() {
         const today = new Date();
         const withinWeek = new Date();

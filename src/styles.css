@@ -4,7 +4,6 @@
 
     --header-bg-color: #eff1f6;
     --sidebar-bg-color: #eff1f6;
-    /* --sidebar-bg-color-dark: #ccd3e7; */
     --sidebar-button-color: white;
     --body-bg-color: white;
     --box-shadow-color: rgb(225, 225, 225);
@@ -132,7 +131,6 @@ header {
     margin: -20px -20px 50px -20px;
     padding: 10px 10px 10px 20px;
     background-color: var(--sidebar-bg-color-dark);
-    /* color: #dee2e6; */
 }
 
 #user a {
@@ -156,7 +154,6 @@ nav {
     flex: 1;
     display: flex;
     flex-direction: column;
-    /* gap: 15px; */
 }
 
 nav h2 {
@@ -170,10 +167,7 @@ nav > button, #project-list button {
     align-items: center;
     gap: 15px;
     border: none;
-    /* border-bottom: 1px solid var(--light-gray); */
-    /* letter-spacing: .05em; */
     border-radius: 0;
-    /* font-size: 1.1rem; */
     text-align: left;
     padding: 15px 0px 15px 10px;
     box-shadow: none;
@@ -212,9 +206,7 @@ nav h2:not(:first-child) {
     background-color: var(--modal-btn-affirm);
     padding: 5px 14px;
     border-radius: 15px;
-    font-size: .8rem;
-    /* color: rgb(96, 96, 96); */
-    
+    font-size: .8rem; 
 }
 
 #project-list {
@@ -222,7 +214,6 @@ nav h2:not(:first-child) {
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    /* gap: 15px; */
 }
 
 /**************************
@@ -230,12 +221,10 @@ nav h2:not(:first-child) {
 **************************/
 #main {
     min-height: 600px;
-    /* height: auto; */
     width: calc(100% - var(--sidebar-width));
     margin-left: 18rem;
     padding: 20px 5%;
     overflow: hidden;
-    /* transition: margin-left 500ms, width 500ms; */
 }
 
 .view-header {
@@ -254,19 +243,6 @@ nav h2:not(:first-child) {
     font-size: 1rem;
     color: var(--date-color);
 }
-/*
-.project-component div:first-child {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid black;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-.project-component {
-    margin-bottom: 70px;
-}*/
 
 .task-component {
     width: 100%;
@@ -275,7 +251,6 @@ nav h2:not(:first-child) {
     overflow: hidden;
     transition: max-height 500ms;
     border-bottom: 1px solid var(--light-gray);
-    /* padding-bottom: 15px; */
     margin-bottom: 15px;
     display: grid;
     grid-template-columns: 3px 13px 1fr repeat(3, min-content);
@@ -283,10 +258,6 @@ nav h2:not(:first-child) {
     align-items: center;
     gap: 15px;
 }
-
-/* .task-component.expand {
-    height: 400px;
-} */
 
 .task-component p:first-of-type {
     text-wrap: nowrap;
@@ -343,19 +314,12 @@ nav h2:not(:first-child) {
     transform: rotate(-180deg);
 }
 
-.task-component:has(.expand-task:checked) {
-    /* max-height: 100px; */
-}
-
 .complete-label {
     display: none;
 }
 
 .expanded-task-content {
     grid-column: 2 / -1;
-    /* display: flex;
-    flex-direction: column;
-    gap: 15px; */
     transition: visibility 500ms;
     visibility: hidden;
 }
@@ -374,7 +338,6 @@ nav h2:not(:first-child) {
 
 .expanded-task-content .task-description {
     line-height: 1.5em;
-    /* letter-spacing: .05em; */
     padding-bottom: 15px;
 }
 
@@ -437,7 +400,6 @@ nav h2:not(:first-child) {
 }
 
 .modal form input:focus {
-    /* border: 1px solid var(--modal-form-color); */
     outline: none;
     border: 1px solid blue;
 }
@@ -476,14 +438,19 @@ nav h2:not(:first-child) {
 /**************************
 * Media Queries
 **************************/
-/* 1400px and below */
-@media only screen and (max-width: 1400px) {
+/* 500px and below */
+@media only screen and (max-width: 500px) {
+    #sidebar button {
 
-}
+    }
 
-/* 1200px and below */
-@media only screen and (max-width: 1200px) {
+    .task-component {
+        font-size: .8rem;
+    }
 
+    .task-due {
+        font-size: .7rem;
+    }
 }
 
 /* 800px and below */

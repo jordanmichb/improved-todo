@@ -105,8 +105,6 @@ function createTaskComponent(task, i) {
     ScreenController.addCompleteTaskEvent(taskComplete, task);
     // Event for editing the task
     ScreenController.addEditTaskEvent(editImg, task);
-    // Event for deleting the task
-    //ScreenController.addDeleteTaskEvent(deleteImg, task);
     // Event for expanding the task
     ScreenController.addExpandTaskEvent(expandImg, taskComponent);
 
@@ -124,7 +122,6 @@ function createTaskComponent(task, i) {
     taskComponent.appendChild(taskName);
     taskComponent.appendChild(taskDate);
     taskComponent.appendChild(editBtn);
-    // taskComponent.appendChild(deleteBtn);
     taskComponent.appendChild(expand);
     taskComponent.appendChild(expandLabel);
     taskComponent.appendChild(createTaskComponentExpand(task));
@@ -150,20 +147,16 @@ function createProjectView(project) {
     // Create the view container and header
     const view = document.createElement('div');
     const header = createHeader(project.name);
-    // const projectDue = document.createElement('span');
     const btnContainer = document.createElement('div');
     const addTaskBtn = document.createElement('button');
 
     view.id = 'content';
 
-    // projectDue.classList.add('project-due-header');
     btnContainer.classList.add('project-btns');
     addTaskBtn.classList.add('add-task');
 
-    // projectDue.textContent = project.dueDate;
     addTaskBtn.textContent = '+ Add task';
 
-    // header.appendChild(projectDue);
     btnContainer.appendChild(addTaskBtn);
     view.appendChild(header);
     view.appendChild(btnContainer);
