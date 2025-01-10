@@ -355,8 +355,6 @@ const ScreenController = (function() {
         function showDeleteModal(e, task) {
             e.preventDefault();
             
-            
-
             const delTaskSubmit = document.createElement('button');
             delTaskSubmit.id = 'del-task-submit';
             delTaskSubmit.textContent = 'Delete';
@@ -412,6 +410,7 @@ const ScreenController = (function() {
 
     // Cancel deleting task
     cancelDelTaskBtn.addEventListener('click', function(e) {
+        e.preventDefault();
         delTaskModal.style.visibility = 'hidden';
     });
 
