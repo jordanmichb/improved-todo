@@ -288,6 +288,9 @@ const ScreenController = (function() {
             const priorityOpts = document.querySelectorAll('.pri-optn');
             // split date into [dd, mm, yyyy]
             const date = task.dueDate.split('/');
+            // Add zero tto single digit month/day, otherwise value will not display properly
+            if (date[0].length === 1) { date[0] = `0${date[0]}`};
+            if (date[1].length === 1) { date[1] = `0${date[1]}`};
 
             // Add task's current info into input fields 
             editName.value = task.name;
@@ -331,6 +334,9 @@ const ScreenController = (function() {
             
             // Input comes as yyyy-mm-dd, format to mm/dd/yyyy for display
             const date = editDue.value.split('-');
+            // Remove leading 0 if month is single digit
+            if (date[1].charAt(0) === '0') { date[1] = date[1].slice(1, date[1].length)};
+            if (date[2].charAt(0) === '0') { date[2] = date[2].slice(1, date[2].length)};
             const due = `${date[1]}/${date[2]}/${date[0]}`;
 
             task.editTask(editName.value, editDesc.value, due, editPriority.value, task.complete);
