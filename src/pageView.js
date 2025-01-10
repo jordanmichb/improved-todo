@@ -35,22 +35,27 @@ function createHeader(title) {
 function createTaskComponentExpand(task) {
     const expanded = document.createElement('div');
     const parent = document.createElement('div');
+    const title = document.createElement('div');
     const description = document.createElement('div');
 
     const parentSpan = document.createElement('span');
+    const titleSpan = document.createElement('span');
     const descSpan = document.createElement('span');
 
     expanded.classList.add('expanded-task-content');
     parent.classList.add('task-parent');
+    title.classList.add('task-title');
     description.classList.add('task-description');
 
     parentSpan.textContent = 'Project: ';
+    titleSpan.textContent = 'Title: '
     descSpan.textContent = 'Description: ';
 
     parent.append(parentSpan, task.parentProject.name);
+    title.append(titleSpan, task.name);
     description.append(descSpan, task.description);
 
-    expanded.append(parent, description);
+    expanded.append(parent, title, description);
 
     return expanded;
 }

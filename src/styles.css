@@ -332,7 +332,7 @@ nav h2:not(:first-child) {
     font-weight: bold;
 }
 
-.expanded-task-content .task-parent {
+.expanded-task-content .task-parent, .expanded-task-content .task-title  {
     margin-bottom: 15px;
 }
 
